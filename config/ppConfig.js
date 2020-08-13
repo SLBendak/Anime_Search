@@ -10,8 +10,8 @@ passport.serializeUser((user, cb) => {
 // Passport "deserializeUser" is going to take the id and look that 
 // up in the database
 passport.deserializeUser((id, cb) => {
-    cb(null, user.id)
-    .catch(cb);
+    // cb(null, user.id)
+    // .catch(cb);
     db.user.findByPk(id)
     .then(user => {
         cb(null, user)

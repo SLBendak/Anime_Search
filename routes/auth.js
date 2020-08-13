@@ -27,26 +27,33 @@ router.post('/signup', (req, res) => {
     if(created){
       // if created, success and redirect
       console.log(`${user.name} was created`)
+      // FLASH MESSAGE
       passport.authenticate('local', {
-        successRedirect: '/'
+        successRedirect: '/',
+        successFlash: 'Account created and logging in'
       })(req, res);
       // res.redirect('/');
     } else {
       // Email already exists
       console.log('Email already exists');
+      // FLASH MESSAGE
+      req.flash('Email already exists. Please try again.')
       res.redirect('/auth/signup');
     }
   })
   .catch(err => {
     console.log('error', err);
+    req.flash(`Error, unfortunately... ${err}`);
     res.redirect('/auth/signup');
   });
 
 });
-
+// FLASH MESSAGE
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/auth/login'
+  failureRedirect: '/auth/login',
+  succcessFlash: 'Welcome back.',
+  failureFlash: 'Email or password incorrect, please try again.'
 }));
 
 // router.post('/login', (req, res) => {
@@ -55,6 +62,8 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', (req, res) => {
   req.logOut();
+  // FLASH MESSAGE
+  req.flash('See you soon. Logging out.');
   res.redirect('/');
 })
 

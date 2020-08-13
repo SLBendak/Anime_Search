@@ -5,6 +5,7 @@ const app = express();
 const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig')
+const flash = ('connect-flash');
 
 app.set('view engine', 'ejs');
 
@@ -27,6 +28,9 @@ app.use(session({
 // initialize passport and run session as middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// flash for temporary message to the user
+app.use(flash());
 
 app.get('/', (req, res) => {
   res.render('index');
