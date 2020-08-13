@@ -25,7 +25,7 @@ app.use(session({
 }));
 
 // initialize passport and run session as middleware
-app.use(passport.initialized());
+app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req, res) => {
