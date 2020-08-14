@@ -4,8 +4,11 @@ const layouts = require('express-ejs-layouts');
 const app = express();
 const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
-const passport = require('./config/ppConfig')
-const flash = ('connect-flash');
+const passport = require('./config/ppConfig');
+const flash = require('connect-flash');
+
+// require the authorization middleware at the top of the page
+const IsLoggedIn = require('./middleware/isLoggedIn');
 
 app.set('view engine', 'ejs');
 
@@ -41,10 +44,10 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { alert: req.flash() });
+  res.render('index', { alerts: res.locals.alerts });
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', IsLoggedIn, (req, res) => {
   res.render('profile');
 });
 

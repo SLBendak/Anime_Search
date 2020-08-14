@@ -80,7 +80,7 @@ describe('User instance methods', function() {
         if (user.validPassword('password')) {
           done();
         } else {
-          done(user);
+          done(!user);
         }
       }).catch(function(error) {
         done(error);
@@ -89,10 +89,10 @@ describe('User instance methods', function() {
 
     it('should invalidate an incorrect password', function(done) {
       db.user.findOne().then(function(user) {
-        if (!user.validPassword('nope')) {
+        if (user.validPassword('nope')) {
           done();
         } else {
-          done(user);
+          done(!user);
         }
       }).catch(function(error) {
         done(error);
