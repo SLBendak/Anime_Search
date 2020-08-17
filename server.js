@@ -44,10 +44,54 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.render('index', { alerts: res.locals.alerts });
-});
+// app.get('/', (req, res) => {
 
+//   res.render('index', { alerts: res.locals.alerts });
+// });
+
+///////////////////////////////////////////////////////////////////////////// home page shows
+app.get('/', (req, res) => {
+  
+  axios.get('https://api.jikan.moe/v3/genre/anime/27')
+  .then((response) => {
+    let results = response.data.anime;
+    console.log(response.data.anime)
+    // setting variable to our data
+    res.render('index', {shows: results});
+    // render home with the data
+  })
+  .catch(err => {
+    console.log("you done goofed", err)
+  })
+})
+
+///////////////////////////////////////////////////////////////////////////// details page 
+
+app.get('/details/:show_id', (req, res) => {
+  let i = req.params.show_id;
+
+  axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+  .then((response) => {
+    let results = response.data;
+    console.log(response.data)
+    res.render('details', {shows: results})
+  })
+  .catch(err => {
+    console.log('err')
+  })
+
+})
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////
 app.get('/profile', IsLoggedIn, (req, res) => {
   res.render('profile');
 });

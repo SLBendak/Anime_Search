@@ -1,2 +1,16 @@
 <h2>Homepage</h2>
 
+
+<% if (!currentUser) { %>
+    
+<% } else { %> 
+<% shows.forEach(s => { %>
+    <a href="/details/<%=s.mal_id%>">
+    <h2><%= s.title %> </h2>
+    <img id='result-poster' src="<%= s.image_url %>" alt="Poster">
+    
+    <p><small>Click for show details</small></p>
+    </a>
+<% }) %> 
+
+<% } %> 

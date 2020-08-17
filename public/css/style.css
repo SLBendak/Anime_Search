@@ -1,3 +1,7 @@
+
+body{ 
+  text-align: center;
+}
 nav ul li {
   text-decoration: none;
   display: inline-block;
