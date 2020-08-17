@@ -6,6 +6,7 @@ const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
+const axios = require('axios');
 
 // require the authorization middleware at the top of the page
 const IsLoggedIn = require('./middleware/isLoggedIn');
@@ -52,11 +53,14 @@ app.get('/profile', IsLoggedIn, (req, res) => {
 });
 
 app.use('/auth', require('./routes/auth'));
+// app.use('/shows', require('./routes/shows'));
 
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
 });
+
+console.log('hey there');
 
 module.exports = server;
