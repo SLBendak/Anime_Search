@@ -82,14 +82,53 @@ app.get('/details/:show_id', (req, res) => {
 
 })
 
+//////////////////////////////////////////////////////////////////////////// Title search
 
+app.get('/results', (req, res) => {
+  let search = req.query.searchTitle;
+  // const fixTitle = s.split(" ").join("%20")
+  let qs = {
+    params: {
+      s: search
+    }
+  }
+  console.log("test", search)
+  axios.get(`http://api.jikan.moe/v3/search/anime/?q=${search}`, qs)
+  .then((response) => {
+      console.log("wrong route")
+      let result = response.data.results;
+      // setting variable to our data
+      res.render('results', {shows: result});
+      // render home with the data
+  })
+  .catch(err => {
+      console.log("you done goofed", err)
+  })
+})
 
+//////////////////////////////////////////////////////////////////////////// Genre search
 
-
-
-
-
-
+app.get('/genreResults', (req, res) => {
+  let search = req.query.genreTitle;
+  
+  let qs = {
+    params: {
+      s: search
+    }
+  }
+  console.log("test", search)
+  axios.get(`https://api.jikan.moe/v3/genre/anime/${search}`, qs)
+  .then((response) => {
+      console.log("correct route")
+      let result = response.data.anime;
+      // setting variable to our data
+      res.render('genreResults', {shows: result});
+      // render home with the data
+  })
+  .catch(err => {
+      console.log("you done goofed", err)
+  })
+})
 
 ////////////////////////////////////////
 app.get('/profile', IsLoggedIn, (req, res) => {

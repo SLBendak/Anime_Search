@@ -4,6 +4,14 @@
 <% if (!currentUser) { %>
     
 <% } else { %> 
+<!--  -->
+<p>Search for an Anime below...</p>
+<form method="GET" action="/results">
+    <label for="searchTitle"></label>
+    <input id="searchTitle" type="text" name="searchTitle" required>
+    <input id='button' type="submit">
+</form>
+<!--  -->
 <% shows.forEach(s => { %>
     <a href="/details/<%=s.mal_id%>">
     <h2><%= s.title %> </h2>
