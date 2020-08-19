@@ -7,6 +7,10 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
 const axios = require('axios');
+////////////////////////////////////////////////////////////////////////
+var db = require('./models');
+//////////////////////////////////////////// METHOD OVERRIDE
+const methodOverride = require('method-override');
 
 // require the authorization middleware at the top of the page
 const IsLoggedIn = require('./middleware/isLoggedIn');
@@ -17,6 +21,8 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+//////////////////////////////////////////// METHOD OVERRIDE
+app.use(methodOverride('_method'));
 
 // secret: what we actually giving the user to use our site // session cookie
 // resave: save the session even if it's modified, make this false
@@ -73,7 +79,7 @@ app.get('/details/:show_id', (req, res) => {
   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
   .then((response) => {
     let results = response.data;
-    console.log(response.data)
+    // console.log(response.data)
     res.render('details', {shows: results})
   })
   .catch(err => {
@@ -129,6 +135,87 @@ app.get('/genreResults', (req, res) => {
       console.log("you done goofed", err)
   })
 })
+
+//////////////////////////////////////////////////////////////////////////// favorite shows
+
+
+app.get('/profile', (req, res) => {
+  // TODO: Get all records from the DB and render to view
+
+  // db.users_shows.findAll()
+  db.show.findAll()
+    .then(favorites => {
+      for (let i=0; i < favorites.length; i++){
+        let eachFavorite = favorites[i];
+        console.log(eachFavorite.get())
+      }
+      res.render('profile', {favorites: favorites});
+
+    })
+   .catch(error => {
+    console.log("Not Found", error)
+  })
+});
+
+
+
+
+  app.post('/profile', (req, res) => {
+    // TODO: Get form data and add a new record to DB
+      // console.log(req.body.title);
+      db.show.findOrCreate({
+        where: {
+          title: req.body.title
+        },
+        defaults: {
+          image: req.body.image
+        }
+      })
+      .then(([show, showCreated]) =>{
+        db.users_shows.findOrCreate({
+          where: {
+            userId: req.user.id,
+            showId: show.id
+          }
+        })
+        .then(([favorite, favoriteCreated]) => {
+          console.log(favorite.get())
+          res.redirect("/profile");
+        })
+        .catch(error => {
+          res.status(404).send("error", error)
+          
+        })
+      })
+      .catch(error => {
+        res.status(404).send("error", error)
+        
+      })
+
+  });
+
+//////////////////////////////////////////////////////////////////////////// delete favorite shows
+
+  
+app.delete('/profile', (req, res) => {
+  
+  db.users_shows.destroy({
+    where: {
+      userId: req.user.id,
+      titleId: req.eachFavorite
+    }
+    .then(([favorite, favoriteDeleted]) => {
+      res.redirect("/profile");
+
+    })
+    .catch(error => {
+      res.status(404).send("error", error)
+    })
+  })
+  
+});
+
+
 
 ////////////////////////////////////////
 app.get('/profile', IsLoggedIn, (req, res) => {

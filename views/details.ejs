@@ -24,4 +24,11 @@
 <% for(let i = 0; i < shows.genres.length; i++) { %>
     <%= shows.genres[i].name + ","%>
 <% } %> 
+
+<form method="POST" action="/profile">
+    <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
+    <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+    <button class="btn btn-primary" type="submit">Add to Favorites</button>
+  </form>
+
 </p>

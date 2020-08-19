@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.user.belongsToMany(models.show, {through: "usersShows"})
+      models.user.belongsToMany(models.show, {through: "users_shows"})
     }
   };
   user.init({

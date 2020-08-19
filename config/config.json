@@ -1,16 +1,16 @@
 {
   "development": {
-    "database": "project_2_development",
+    "database": "anime_search_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "database": "project_2_test",
+    "database": "anime_search_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "database": "project_2_production",
+    "database": "anime_search_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
