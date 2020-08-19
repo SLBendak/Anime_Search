@@ -29,6 +29,12 @@
     <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
     <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
     <button class="btn btn-primary" type="submit">Add to Favorites</button>
-  </form>
+</form>
+
+<form method="POST" action="/watch_list">
+    <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
+    <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+    <button class="btn btn-primary" type="submit">Add to Watch List</button>
+</form>
 
 </p>

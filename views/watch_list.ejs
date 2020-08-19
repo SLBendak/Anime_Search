@@ -1,0 +1,19 @@
+<h2>Watch List Page</h2>
+
+<h3>Welcome to your Watch List</h3>
+
+<div>
+    <% for (let i=0; i < pins.length; i++){ %>
+        <% let eachPin = pins[i].get(); %>
+       
+        <h3><%= eachPin.title %> </h3>
+        <p>
+            <img src="<%= eachPin.image %>" alt="poster">
+        </p>
+       <% console.log(eachPin) %>
+       <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=DELETE">
+          <button class="btn btn-primary" type="submit">Remove from Watch List</button>
+        </form>
+     <% } %>
+
+</div>

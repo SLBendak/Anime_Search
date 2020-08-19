@@ -136,8 +136,9 @@ app.get('/genreResults', (req, res) => {
   })
 })
 
-//////////////////////////////////////////////////////////////////////////// favorite shows
+/////////////////////////////////////////////////////////////////////////////////// favorite shows
 
+//////////////////////////////////////////////////////////// Favorite Get Route
 
 app.get('/favorites', (req, res) => {
   // TODO: Get all records from the DB and render to view
@@ -162,7 +163,7 @@ app.get('/favorites', (req, res) => {
     res.sendStatus(500)
   })
 });
-
+//////////////////////////////////////////////////////////// Favorite Post Route
   app.post('/favorites', (req, res) => {
     // TODO: Get form data and add a new record to DB
       // console.log(req.body.title);
@@ -208,16 +209,96 @@ app.delete('/favorites/:id', (req, res) => {
       showId: req.params.id
     }
   })
-  .then(([favorite, favoriteDeleted]) => {
+  .then(() => {
     res.redirect("/favorites");
-
   })
   .catch(error => {
     res.status(404).send(error)
   })
 })
-  
 
+/////////////////////////////////////////////////////////////////////////////////// pin shows
+
+//////////////////////////////////////////////////////////// pin Get Route
+
+app.get('/watch_list', (req, res) => {
+  // TODO: Get all records from the DB and render to view
+  // If there is no user redirect to index
+  if(!req.user) {
+    res.redirect('/')
+    return
+  }
+  
+  const userId = req.user.dataValues.id;
+
+  db.user.findByPk(userId, {
+    include: [{
+      model: db.pin
+    }]
+  })
+  .then(user => {
+    res.render('watch_list', {pins: user.pins})
+  })
+  .catch(error => {
+    console.log("Not Found", error)
+    res.sendStatus(500)
+  })
+});
+//////////////////////////////////////////////////////////// pin Post Route
+// TODO: Get form data and add a new record to DB
+
+  app.post('/watch_list', (req, res) => {
+      
+      db.pin.findOrCreate({
+        where: {
+          title: req.body.title
+        },
+        defaults: {
+          image: req.body.image,
+          seen: "no"
+        }
+      })
+      .then(([show, showCreated]) =>{
+        db.users_pins.findOrCreate({
+          where: {
+            userId: req.user.id,
+            pinId: show.id
+          }
+        })
+        .then(([pin, pinCreated]) => {
+          console.log(pin.get())
+          res.redirect("/watch_list");
+        })
+        .catch(error => {
+          res.status(404).send("error", error)
+          
+        })
+      })
+      .catch(error => {
+        res.status(404).send("error", error)
+        
+      })
+
+  });
+
+  //////////////////////////////////////////////////////////////////////////// delete pin shows
+
+  
+app.delete('/watch_list/:id', (req, res) => {
+  
+  db.users_pins.destroy({
+    where: {
+      userId: req.user.dataValues.id,
+      pinId: req.params.id
+    }
+  })
+  .then(() => {
+    res.redirect("/watch_list");
+  })
+  .catch(error => {
+    res.status(404).send(error)
+  })
+})
 
 
 ////////////////////////////////////////
