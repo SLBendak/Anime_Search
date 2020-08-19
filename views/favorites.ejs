@@ -5,15 +5,13 @@
 <div>
     <% for (let i=0; i < favorites.length; i++){ %>
         <% let eachFavorite = favorites[i].get(); %>
-        <h3>
-            <%= eachFavorite.title %> 
-        </h3>
+       
+        <h3><%= eachFavorite.title %> </h3>
         <p>
             <img src="<%= eachFavorite.image %>" alt="poster">
         </p>
        <% console.log(eachFavorite) %>
-       <form method="POST" action="/profile?_method=DELETE">
-          <input id='faveTitles' hidden type="text" name="titleId" value="<%= eachFavorite.id %>">
+       <form method="POST" action="/favorites/<%= eachFavorite.id %>?_method=DELETE">
           <button class="btn btn-primary" type="submit">Remove from Favorites</button>
         </form>
      <% } %>

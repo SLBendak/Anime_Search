@@ -139,28 +139,31 @@ app.get('/genreResults', (req, res) => {
 //////////////////////////////////////////////////////////////////////////// favorite shows
 
 
-app.get('/profile', (req, res) => {
+app.get('/favorites', (req, res) => {
   // TODO: Get all records from the DB and render to view
+  // If there is no user redirect to index
+  if(!req.user) {
+    res.redirect('/')
+    return
+  }
+  
+  const userId = req.user.dataValues.id;
 
-  // db.users_shows.findAll()
-  db.show.findAll()
-    .then(favorites => {
-      for (let i=0; i < favorites.length; i++){
-        let eachFavorite = favorites[i];
-        console.log(eachFavorite.get())
-      }
-      res.render('profile', {favorites: favorites});
-
-    })
-   .catch(error => {
+  db.user.findByPk(userId, {
+    include: [{
+      model: db.show
+    }]
+  })
+  .then(user => {
+    res.render('favorites', {favorites: user.shows})
+  })
+  .catch(error => {
     console.log("Not Found", error)
+    res.sendStatus(500)
   })
 });
 
-
-
-
-  app.post('/profile', (req, res) => {
+  app.post('/favorites', (req, res) => {
     // TODO: Get form data and add a new record to DB
       // console.log(req.body.title);
       db.show.findOrCreate({
@@ -180,7 +183,7 @@ app.get('/profile', (req, res) => {
         })
         .then(([favorite, favoriteCreated]) => {
           console.log(favorite.get())
-          res.redirect("/profile");
+          res.redirect("/favorites");
         })
         .catch(error => {
           res.status(404).send("error", error)
@@ -197,29 +200,29 @@ app.get('/profile', (req, res) => {
 //////////////////////////////////////////////////////////////////////////// delete favorite shows
 
   
-app.delete('/profile', (req, res) => {
+app.delete('/favorites/:id', (req, res) => {
   
   db.users_shows.destroy({
     where: {
-      userId: req.user.id,
-      titleId: req.eachFavorite
+      userId: req.user.dataValues.id,
+      showId: req.params.id
     }
-    .then(([favorite, favoriteDeleted]) => {
-      res.redirect("/profile");
-
-    })
-    .catch(error => {
-      res.status(404).send("error", error)
-    })
   })
+  .then(([favorite, favoriteDeleted]) => {
+    res.redirect("/favorites");
+
+  })
+  .catch(error => {
+    res.status(404).send(error)
+  })
+})
   
-});
 
 
 
 ////////////////////////////////////////
-app.get('/profile', IsLoggedIn, (req, res) => {
-  res.render('profile');
+app.get('/favorites', IsLoggedIn, (req, res) => {
+  res.render('favorites');
 });
 
 app.use('/auth', require('./routes/auth'));

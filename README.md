@@ -33,7 +33,7 @@ Express authentication template using Passport + flash messages + custom middlew
 | POST | /auth/login | auth.js | Login user |
 | POST | /auth/signup | auth.js | Creates User |
 | GET | /auth/logout | auth.js | Removes session info |
-| GET | /profile | server.js | Regular User Profile |
+| GET | /favorites | server.js | Regular User favorites |
 
 ## Steps To Use
 
