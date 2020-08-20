@@ -11,10 +11,21 @@ nav ul li {
 h1 {
   color: chartreuse;
 }
-#carouselContainer{
+/* #carouselContainer{
   width: 40%;
 }
 #carousel{
   height: 500px;
   width: 200px;
+} */
+
+#brand{
+  padding-left: 350px;
+  padding-top: 5px;
+  font-size: 35px;
+  color: green;
+}
+
+li{
+  padding-top: 15px;
 }

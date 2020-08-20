@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Auth App</title>
+    <title>Anime List</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
@@ -32,16 +32,13 @@
           <% } else { %>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Nani Anime</a>
+          <!-- <a class="navbar-brand" href="#">Nani Anime</a> -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/auth/logout">Logout</a>
-              </li>
               <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
               </li>
@@ -92,6 +89,13 @@
                   <a class="dropdown-item" href="genreResults?genreTitle=41">Thriller</a>
                 </div>
               </li>
+              
+              <li class="nav-item active">
+                <a class="nav-link" href="/auth/logout">Logout</a>
+              </li>
+
+              <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
+
             </ul>
             <form class="form-inline my-2 my-lg-0" method="GET" action="/results">
               <label for="searchTitle"></label>
@@ -104,7 +108,7 @@
 
       <% } %> 
     </header>
-    <h1>Anime List</h1>
+    <!-- <h1>Anime List</h1> -->
     <%- body %>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
