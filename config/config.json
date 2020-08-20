@@ -12,6 +12,7 @@
   "production": {
     "database": "anime_search_production",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "use_env_variable": "postgres://mdkykhmpriadkw:b0150ba3d36d3e82e5100c806bf85c771b96aec33a9915d0f26be0e678e32fa6@ec2-52-22-94-132.compute-1.amazonaws.com:5432/d18n3f3k3cusil"
   }
 }
