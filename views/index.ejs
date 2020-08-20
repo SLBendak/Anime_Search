@@ -1,4 +1,4 @@
-<h2>Homepage</h2>
+
 
 
 <% if (!currentUser) { %>
@@ -16,12 +16,12 @@
         </div>
       </div> -->
 
-<div class="index-container">
+<div class="results-container">
     <% shows.forEach(s => { %>
-        <div class="index-items">
-            <a href="/details/<%=s.mal_id%>">
+        <div class="results-items">
+            <a id="result-text" href="/details/<%=s.mal_id%>">
             <h2><%= s.title %> </h2>
-            <img id='index-poster' src="<%= s.image_url %>" alt="Poster">
+            <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
             
             <p><small>Click for show details</small></p>
             </a>

@@ -6,6 +6,7 @@
     <title>Anime List</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&display=swap" rel="stylesheet">
   </head>
   <body>
     <%- include partials/alerts %>
@@ -13,31 +14,41 @@
      
       <% if(!currentUser) { %>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-light">
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          
           <div class="navbar-nav">
-            <a class="nav-link active" href="/auth/signup">Signup <span class="sr-only">(current)</span></a>
-            <a class="nav-link active" href="/auth/login">Login <span class="sr-only">(current)</span></a>
+            <ul class="navbar-nav mr-auto">
+              <li><a class="nav-link active" href="/auth/signup">Signup <span class="sr-only">(current)</span></a></li>
+              <li><a class="nav-link active" href="/auth/login">Login <span class="sr-only">(current)</span></a></li>
+            </ul>
+          
             <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
+
+
           </div>
+          
         </div>
       </nav>
 
-      <div class="auth-page">
-        <h1>NANI ANIME</h1>
-
-        <a class="nav-link active" href="/auth/signup">Signup</a>
-        <a class="nav-link active" href="/auth/login">Login</a>
-      </div>
+      <!-- <div class="auth-container">
+        <div class="auth-items">
+          <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
+          <ul class="navbar-nav mr-auto">
+            <li><a class="nav-link active" href="/auth/signup">Signup <span class="sr-only">(current)</span></a></li>
+            <li><a class="nav-link active" href="/auth/login">Login <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div> -->
 
 
           <% } else { %>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark">
           <!-- <a class="navbar-brand" href="#">Nani Anime</a> -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -103,10 +114,10 @@
               <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
 
             </ul>
-            <form class="form-inline my-2 my-lg-0" method="GET" action="/results">
+            <form  class="form-inline my-2 my-lg-0" method="GET" action="/results">
               <label for="searchTitle"></label>
               <input class="form-control mr-sm-2" type="search" placeholder="Search Title" aria-label="Search" name="searchTitle" id="searchTitle" required>
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button id="searchSubmit" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </div>
         </nav>

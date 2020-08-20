@@ -1,12 +1,29 @@
 
-body{ 
-  text-align: center;
-  background-image: url('/public/assets/images/lantern-wallpaper.jpg');
+body{
+  background-image: url("../assets/images/lantern-wallpaper.jpg");
+  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  background-size: cover;
+  font-family: 'Bangers', cursive;
 }
+
 nav ul li {
   text-decoration: none;
   display: inline-block;
   margin-right: .3em;
+}
+
+.navbar{
+  color: white;
+  
+  border: 10px solid rgba(0,0,0, .7);
+  border-radius: 50px;
+  background-color: #bf3a30;
+  background-image: linear-gradient(315deg, #bf3a30 0%, #864ba2 74%);
+  
 }
 
 h1 {
@@ -21,20 +38,41 @@ h1 {
 } */
 
 #brand{
-  padding-left: 55%;
-  padding-top: 5px;
-  font-size: 35px;
-  color: green;
+  padding-left: 20%;
+  margin: 0 auto;
+  /* padding-top: -10px; */
+  font-size: 100px;
+  color: whitesmoke;
+  font-family: 'Fredoka One', cursive;
 }
 
 li{
-  padding-top: 15px;
+  margin-top: 90px;
+  
+  /* padding-top: 30px; */
+  font-size: 20px;
+  border: 10px solid rgba(0,0,0, .5);
+  border-radius: 50px;
+  background: rgba(0,0,0, .4);
 }
 
-.index-container{
+.login-signup-container{
+  font-family: 'Bangers', cursive;
+  font-size: 35px;
+  text-align: center;
+  color: white;
+  padding: 60px;
+  width: 500px;
+  margin: 100px auto;
+  width: 600px;
+  background-color: rgba(0,0,0, .9);
+}
+
+.auth-container{
+  margin-top: 30%;
   margin: auto;
-  width: 1200px;
-  background-color: black;
+  width: 600px;
+  background-color: rgba(0,0,0, .7);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   
@@ -42,12 +80,37 @@ li{
   justify-content: space-evenly; 
 }
 
-.index-items{
+.auth-items{
   text-align: center;
   padding: 20px;
+  font-family: 'Bangers', cursive;
+  
 }
 
-#index-poster{
-  height: 300px;
-  width: 200px;
+.results-container{
+  margin: auto;
+  width: 1200px;
+  background-color: rgba(0,0,0, .7);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+  align-items: end;
+  justify-content: space-evenly; 
+}
+
+.results-items{
+  text-align: center;
+  padding: 20px;
+  font-family: 'Bangers', cursive;
+  
+}
+
+#result-text{
+  color: white;
+}
+
+#results-poster{
+  height: 375px;
+  width: 275px;
+  border: 10px groove white;
 }
