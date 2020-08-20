@@ -1,6 +1,7 @@
 
 body{ 
   text-align: center;
+  background-image: url('/public/assets/images/lantern-wallpaper.jpg');
 }
 nav ul li {
   text-decoration: none;
@@ -20,7 +21,7 @@ h1 {
 } */
 
 #brand{
-  padding-left: 350px;
+  padding-left: 55%;
   padding-top: 5px;
   font-size: 35px;
   color: green;
@@ -28,4 +29,25 @@ h1 {
 
 li{
   padding-top: 15px;
+}
+
+.index-container{
+  margin: auto;
+  width: 1200px;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+  align-items: end;
+  justify-content: space-evenly; 
+}
+
+.index-items{
+  text-align: center;
+  padding: 20px;
+}
+
+#index-poster{
+  height: 300px;
+  width: 200px;
 }

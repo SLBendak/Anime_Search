@@ -11,10 +11,10 @@
     <%- include partials/alerts %>
     <header>
      
-          <% if(!currentUser) { %>
+      <% if(!currentUser) { %>
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Nani Anime</a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,11 +22,17 @@
           <div class="navbar-nav">
             <a class="nav-link active" href="/auth/signup">Signup <span class="sr-only">(current)</span></a>
             <a class="nav-link active" href="/auth/login">Login <span class="sr-only">(current)</span></a>
-
+            <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
           </div>
         </div>
       </nav>
 
+      <div class="auth-page">
+        <h1>NANI ANIME</h1>
+
+        <a class="nav-link active" href="/auth/signup">Signup</a>
+        <a class="nav-link active" href="/auth/login">Login</a>
+      </div>
 
 
           <% } else { %>
@@ -46,7 +52,7 @@
                 <a class="nav-link" href="/favorites">Favorites</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/watch_list">Watch List</a>
+                <a class="nav-link" href="/watch_list">WatchList</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
