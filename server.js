@@ -272,7 +272,7 @@ app.get('/watch_list', (req, res) => {
         .catch(error => {
           res.status(404).send("error", error)
           
-        })
+        }) 
       })
       .catch(error => {
         res.status(404).send("error", error)
@@ -298,6 +298,33 @@ app.delete('/watch_list/:id', (req, res) => {
   .catch(error => {
     res.status(404).send(error)
   })
+})
+
+
+//////////////////////////////////////////////////////////////////////////// update pin shows
+
+
+app.put('/watch_list/:id', (req,res) => {
+  
+  db.pin.update({
+    seen: req.body.showSeen
+
+    
+  },{
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(response => {
+    console.log(response)
+    res.redirect("/watch_list");
+  })
+  .catch(error => {
+    console.log("error: ", error)
+  })
+  // .then(user => {
+  //   user.pin
+  // })
 })
 
 

@@ -5,258 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Auth App</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
   <body>
     <%- include partials/alerts %>
     <header>
-      <nav>
-        <ul>
+     
           <% if(!currentUser) { %>
-            <li><a href="/auth/signup">Signup</a></li>
-            <li><a href="/auth/login">Login</a></li>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Nani Anime</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="/auth/signup">Signup <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="/auth/login">Login <span class="sr-only">(current)</span></a>
+
+          </div>
+        </div>
+      </nav>
+
+
+
           <% } else { %>
-            <li><a href="/auth/logout">Logout</a></li>
-            <li><a href="/">home</a></li>
-            <li><a href="/favorites">Favorites</a></li>
-            <li><a href="/watch_list">Watch List</a></li>
-          </ul>
-        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Nani Anime</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         
-        <nav>
-          <ul>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="1">
-                <input id='button' type="submit" value="Action">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="2">
-                <input id='button' type="submit" value="Adventure">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="3">
-                <input id='button' type="submit" value="Cars">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="4">
-                <input id='button' type="submit" value="Comedy">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="5">
-                <input id='button' type="submit" value="Dementia">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="6">
-                <input id='button' type="submit" value="Demons">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="7">
-                <input id='button' type="submit" value="Mystery">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="8">
-                <input id='button' type="submit" value="Drama">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="9">
-                <input id='button' type="submit" value="Ecchi">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="10">
-                <input id='button' type="submit" value="Fantasy">
-              </form>
-            </li>
-            <li>
-              <form method="GET" action="/genreResults">
-                <input id="genreTitle" type="text" name="genreTitle" hidden value="11">
-                <input id='button' type="submit" value="Game">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="13">
-            <input id='button' type="submit" value="Historical">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="14">
-            <input id='button' type="submit" value="Horror">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="15">
-            <input id='button' type="submit" value="Kids">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="16">
-            <input id='button' type="submit" value="Magic">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="17">
-            <input id='button' type="submit" value="Martial Arts">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="18">
-            <input id='button' type="submit" value="Mecha">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="19">
-            <input id='button' type="submit" value="Music">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="20">
-            <input id='button' type="submit" value="Parody">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="21">
-            <input id='button' type="submit" value="Samurai">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="22">
-            <input id='button' type="submit" value="Romance">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="23">
-            <input id='button' type="submit" value="School">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="24">
-            <input id='button' type="submit" value="Sci Fi">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="25">
-            <input id='button' type="submit" value="Shoujo">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="27">
-            <input id='button' type="submit" value="Shounen">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="29">
-            <input id='button' type="submit" value="Space">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="30">
-            <input id='button' type="submit" value="Sports">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="31">
-            <input id='button' type="submit" value="Super Power">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="32">
-            <input id='button' type="submit" value="Vampire">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="35">
-            <input id='button' type="submit" value="Harem">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="36">
-            <input id='button' type="submit" value="Slice Of Life">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="37">
-            <input id='button' type="submit" value="Supernatural">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="38">
-            <input id='button' type="submit" value="Military">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="39">
-            <input id='button' type="submit" value="Police">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="40">
-            <input id='button' type="submit" value="Psychological">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="41">
-            <input id='button' type="submit" value="Thriller">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="42">
-            <input id='button' type="submit" value="Seinen">
-          </form>
-        </li>
-        <li>
-          <form method="GET" action="/genreResults">
-            <input id="genreTitle" type="text" name="genreTitle" hidden value="43">
-            <input id='button' type="submit" value="Josei">
-          </form>
-        </li>
-      </nav>  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/auth/logout">Logout</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/favorites">Favorites</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/watch_list">Watch List</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Search Genre
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="genreResults?genreTitle=1">Action</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=2">Adventure</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=3">Cars</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=4">Comedy</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=5">Dementia</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=6">Demons</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=7">Mystery</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=8">Drama</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=10">Fantasy</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=11">Game</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=13">Historical</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=14">Horror</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=15">Kids</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=16">Magic</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=17">Martial Arts</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=18">Mecha</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=19">Music</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=20">Parody</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=21">Samurai</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=22">Romance</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=23">School</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=24">Sci Fi</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=27">Shounen</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=29">Space</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=30">Sports</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=31">Super Power</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=32">Vampire</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=35">Harem</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=36">Slice Of Life</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=37">Supernatural</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=38">Military</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=39">Police</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=40">Psychological</a>
+                  <a class="dropdown-item" href="genreResults?genreTitle=41">Thriller</a>
+                </div>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="GET" action="/results">
+              <label for="searchTitle"></label>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search Title" aria-label="Search" name="searchTitle" id="searchTitle" required>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+
+
       <% } %> 
     </header>
     <h1>Anime List</h1>
     <%- body %>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
   </body>
   </html>
   

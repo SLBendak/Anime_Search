@@ -11,3 +11,10 @@ nav ul li {
 h1 {
   color: chartreuse;
 }
+#carouselContainer{
+  width: 40%;
+}
+#carousel{
+  height: 500px;
+  width: 200px;
+}

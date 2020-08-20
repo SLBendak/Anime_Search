@@ -6,14 +6,42 @@
     <% for (let i=0; i < pins.length; i++){ %>
         <% let eachPin = pins[i].get(); %>
        
-        <h3><%= eachPin.title %> </h3>
-        <p>
-            <img src="<%= eachPin.image %>" alt="poster">
-        </p>
-       <% console.log(eachPin) %>
-       <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=DELETE">
-          <button class="btn btn-primary" type="submit">Remove from Watch List</button>
-        </form>
+        <% if(eachPin.seen === "no") { %> 
+            <div class="seen">
+                <h3><%= eachPin.title %> </h3>
+                    <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
+                        <input type="text" hidden name="showSeen" value="yes">
+                        <button class="btn btn-primary" type="submit">seen</button>
+                    </form>
+
+                    <p>
+                        <img name="pinned" src="<%= eachPin.image %>" alt="poster">
+                    </p>
+
+                    <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=DELETE">
+                        <button class="btn btn-primary" type="submit">Remove from Watch List</button>
+                    </form>
+            </div>
+        <% } else { %> 
+            <div class="notseen">  
+
+                <h3><%= eachPin.title %> </h3> 
+
+                    <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
+                        <input type="text" hidden name="showSeen" value="no">
+                        <button class="btn btn-primary" type="submit">not seen</button>
+                    </form>
+
+                    <p>
+                        <img name="pinned" src="<%= eachPin.image %>" alt="poster">
+                    </p>
+
+                    <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=DELETE">
+                        <button class="btn btn-primary" type="submit">Remove from Watch List</button>
+                    </form>
+            </div>
+        <% } %> 
+        
      <% } %>
 
 </div>

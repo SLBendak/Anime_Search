@@ -4,14 +4,19 @@
 <% if (!currentUser) { %>
     
 <% } else { %> 
-<!--  -->
-<p>Search for an Anime below...</p>
-<form method="GET" action="/results">
-    <label for="searchTitle"></label>
-    <input id="searchTitle" type="text" name="searchTitle" required>
-    <input id='button' type="submit">
-</form>
-<!--  -->
+
+
+    <!-- <div id="carouselContainer" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <%// shows.forEach(s => { %>
+                <div class="carousel-item active">
+                    <img id="carousel" src="<%=// s.image_url %>" class="d-block w-100" alt="poster">
+                </div>
+            <%// }) %> 
+        </div>
+      </div> -->
+
+
 <% shows.forEach(s => { %>
     <a href="/details/<%=s.mal_id%>">
     <h2><%= s.title %> </h2>
