@@ -32,14 +32,14 @@ nav ul li {
   padding-left: 5%;
   margin: 0 auto;
   /* padding-top: -10px; */
-  font-size: 100px;
+  font-size: 90px;
   color: whitesmoke;
   font-family: 'Fredoka One', cursive;
   /* font-family: 'Bangers', cursive; */
 }
 
 li{
-  margin-top: 110px;
+  margin-top: 90px;
   
   /* padding-top: 30px; */
   font-size: 10px;
@@ -90,12 +90,12 @@ li{
 
 .detail.container{
   
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
   color: white;
   padding: 60px;
   width: 1200px;
-  margin: 50px auto;
+  margin: 0 auto;
   
   background-color: rgba(0,0,0, .9);
 }
@@ -148,7 +148,7 @@ li{
 
 .favorite-container{
   margin: auto;
-  width: 1200px;
+  width: 1000px;
   background-color: rgba(0,0,0, .7);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -158,6 +158,25 @@ li{
 }
 
 .favorite-items{
+  text-align: center;
+  padding: 20px;
+  font-family: 'Bangers', cursive;
+  color: lightcyan;
+  
+}
+
+.watch-container{
+  margin: auto;
+  width: 1000px;
+  background-color: rgba(0,0,0, .7);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+  align-items: end;
+  justify-content: space-evenly; 
+}
+
+.watch-items{
   text-align: center;
   padding: 20px;
   font-family: 'Bangers', cursive;
