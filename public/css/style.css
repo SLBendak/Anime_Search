@@ -137,12 +137,12 @@ li{
 }
 
 #result-text{
-  /* color: gold; */
+  color: gold;
   
-  font-size: 30px;
+  /* font-size: 30px;
   background: -webkit-linear-gradient(#bf3a30, #864ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent; */
   
 }
 
