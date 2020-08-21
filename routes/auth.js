@@ -55,10 +55,6 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: 'Email or password incorrect, please try again.'
 }));
 
-// router.post('/login', (req, res) => {
-
-// })
-
 router.get('/logout', (req, res) => {
   req.logOut();
   // FLASH MESSAGE

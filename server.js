@@ -7,7 +7,6 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
 const axios = require('axios');
-////////////////////////////////////////////////////////////////////////
 var db = require('./models');
 //////////////////////////////////////////// METHOD OVERRIDE
 const methodOverride = require('method-override');
@@ -50,11 +49,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/', (req, res) => {
-
-//   res.render('index', { alerts: res.locals.alerts });
-// });
-
 ///////////////////////////////////////////////////////////////////////////// home page shows
 app.get('/', (req, res) => {
   
@@ -70,9 +64,7 @@ app.get('/', (req, res) => {
     console.log("you done goofed", err)
   })
 })
-
 ///////////////////////////////////////////////////////////////////////////// details page 
-
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
 
@@ -87,9 +79,7 @@ app.get('/details/:show_id', (req, res) => {
   })
 
 })
-
 //////////////////////////////////////////////////////////////////////////// Title search
-
 app.get('/results', (req, res) => {
   let search = req.query.searchTitle;
   // const fixTitle = s.split(" ").join("%20")
@@ -111,9 +101,7 @@ app.get('/results', (req, res) => {
       console.log("you done goofed", err)
   })
 })
-
 //////////////////////////////////////////////////////////////////////////// Genre search
-
 app.get('/genreResults', (req, res) => {
   let search = req.query.genreTitle;
   
@@ -135,11 +123,9 @@ app.get('/genreResults', (req, res) => {
       console.log("you done goofed", err)
   })
 })
-
 /////////////////////////////////////////////////////////////////////////////////// favorite shows
 
 //////////////////////////////////////////////////////////// Favorite Get Route
-
 app.get('/favorites', (req, res) => {
   // TODO: Get all records from the DB and render to view
   // If there is no user redirect to index
@@ -166,7 +152,6 @@ app.get('/favorites', (req, res) => {
 //////////////////////////////////////////////////////////// Favorite Post Route
   app.post('/favorites', (req, res) => {
     // TODO: Get form data and add a new record to DB
-      // console.log(req.body.title);
       db.show.findOrCreate({
         where: {
           title: req.body.title
@@ -188,19 +173,13 @@ app.get('/favorites', (req, res) => {
         })
         .catch(error => {
           res.status(404).send("error", error)
-          
         })
       })
       .catch(error => {
         res.status(404).send("error", error)
-        
       })
-
   });
-
 //////////////////////////////////////////////////////////////////////////// delete favorite shows
-
-  
 app.delete('/favorites/:id', (req, res) => {
   
   db.users_shows.destroy({
@@ -216,11 +195,9 @@ app.delete('/favorites/:id', (req, res) => {
     res.status(404).send(error)
   })
 })
-
 /////////////////////////////////////////////////////////////////////////////////// pin shows
 
 //////////////////////////////////////////////////////////// pin Get Route
-
 app.get('/watch_list', (req, res) => {
   // TODO: Get all records from the DB and render to view
   // If there is no user redirect to index
@@ -246,44 +223,40 @@ app.get('/watch_list', (req, res) => {
 });
 //////////////////////////////////////////////////////////// pin Post Route
 // TODO: Get form data and add a new record to DB
-
-  app.post('/watch_list', (req, res) => {
-      
-      db.pin.findOrCreate({
+app.post('/watch_list', (req, res) => {
+    
+    db.pin.findOrCreate({
+      where: {
+        title: req.body.title
+      },
+      defaults: {
+        image: req.body.image,
+        seen: "no"
+      }
+    })
+    .then(([show, showCreated]) =>{
+      db.users_pins.findOrCreate({
         where: {
-          title: req.body.title
-        },
-        defaults: {
-          image: req.body.image,
-          seen: "no"
+          userId: req.user.id,
+          pinId: show.id
         }
       })
-      .then(([show, showCreated]) =>{
-        db.users_pins.findOrCreate({
-          where: {
-            userId: req.user.id,
-            pinId: show.id
-          }
-        })
-        .then(([pin, pinCreated]) => {
-          console.log(pin.get())
-          res.redirect("/watch_list");
-        })
-        .catch(error => {
-          res.status(404).send("error", error)
-          
-        }) 
+      .then(([pin, pinCreated]) => {
+        console.log(pin.get())
+        res.redirect("/watch_list");
       })
       .catch(error => {
         res.status(404).send("error", error)
         
-      })
+      }) 
+    })
+    .catch(error => {
+      res.status(404).send("error", error)
+      
+    })
 
-  });
-
-  //////////////////////////////////////////////////////////////////////////// delete pin shows
-
-  
+});
+//////////////////////////////////////////////////////////////////////////// delete pin shows
 app.delete('/watch_list/:id', (req, res) => {
   
   db.users_pins.destroy({
@@ -299,17 +272,11 @@ app.delete('/watch_list/:id', (req, res) => {
     res.status(404).send(error)
   })
 })
-
-
-//////////////////////////////////////////////////////////////////////////// update pin shows
-
-
+//////////////////////////////////////////////////////////////////////////// update pin showSeen
 app.put('/watch_list/:id', (req,res) => {
   
   db.pin.update({
     seen: req.body.showSeen
-
-    
   },{
     where: {
       id: req.params.id
@@ -322,26 +289,17 @@ app.put('/watch_list/:id', (req,res) => {
   .catch(error => {
     console.log("error: ", error)
   })
-  // .then(user => {
-  //   user.pin
-  // })
 })
-
-
 ////////////////////////////////////////
 app.get('/favorites', IsLoggedIn, (req, res) => {
   res.render('favorites');
 });
 
 app.use('/auth', require('./routes/auth'));
-// app.use('/shows', require('./routes/shows'));
-
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
 });
-
-console.log('hey there');
 
 module.exports = server;
