@@ -1,6 +1,3 @@
-<h2>Watch List Page</h2>
-
-<h3>Welcome to your Watch List</h3>
 
 <div class="watch-container">
     <% for (let i=0; i < pins.length; i++){ %>
@@ -11,7 +8,7 @@
                     <h3><%= eachPin.title %> </h3>
                         <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
                             <input type="text" hidden name="showSeen" value="yes">
-                            <button class="btn btn-primary" type="submit">Seen</button>
+                            <button class="btn btn-primary" type="submit">notSeen</button>
                         </form>
                         <p>
                             <img id='results-poster' name="pinned" src="<%= eachPin.image %>" alt="poster">
@@ -25,7 +22,7 @@
                     <h3><%= eachPin.title %> </h3> 
                         <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
                             <input type="text" hidden name="showSeen" value="no">
-                            <button class="btn btn-primary" type="submit">Not Seen</button>
+                            <button class="btn btn-primary" type="submit">Seen</button>
                         </form>
                         <p>
                             <img id='results-poster' name="pinned" src="<%= eachPin.image %>" alt="poster">
