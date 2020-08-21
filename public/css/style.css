@@ -29,7 +29,7 @@ nav ul li {
 
 
 #brand{
-  padding-left: 10%;
+  padding-left: 5%;
   margin: 0 auto;
   /* padding-top: -10px; */
   font-size: 100px;
@@ -39,10 +39,10 @@ nav ul li {
 }
 
 li{
-  margin-top: 90px;
+  margin-top: 110px;
   
   /* padding-top: 30px; */
-  font-size: 20px;
+  font-size: 10px;
   border: 10px solid rgba(0,0,0, .5);
   border-radius: 50px;
   background: rgba(0,0,0, .4);
@@ -121,11 +121,10 @@ li{
 
 .results-container{
   margin: auto;
-  width: 1200px;
+  width: 1000px;
   background-color: rgba(0,0,0, .7);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  
   align-items: end;
   justify-content: space-evenly; 
 }
@@ -138,12 +137,12 @@ li{
 }
 
 #result-text{
-  color: white;
+  color: gold;
 }
 
 #results-poster{
-  height: 375px;
-  width: 275px;
+  height: 325px;
+  width: 225px;
   border: 10px groove lightcyan;
 }
 
