@@ -26,24 +26,16 @@ nav ul li {
   
 }
 
-h1 {
-  color: chartreuse;
-}
-/* #carouselContainer{
-  width: 40%;
-}
-#carousel{
-  height: 500px;
-  width: 200px;
-} */
+
 
 #brand{
-  padding-left: 20%;
+  padding-left: 10%;
   margin: 0 auto;
   /* padding-top: -10px; */
   font-size: 100px;
   color: whitesmoke;
   font-family: 'Fredoka One', cursive;
+  /* font-family: 'Bangers', cursive; */
 }
 
 li{
@@ -65,6 +57,46 @@ li{
   width: 500px;
   margin: 100px auto;
   width: 600px;
+  background-color: rgba(0,0,0, .9);
+}
+
+#titles{
+  font-size: 80px;
+  color: lightsalmon;
+  font-family: 'Bangers', cursive;
+}
+
+#detail-poster{
+  height: 475px;
+  width: 375px;
+  border: 10px groove lightcyan;
+  float: left;
+  margin: 20px;
+}
+
+.score{
+  float:right;
+  padding: 30px;
+  font-size: 30px;
+  border: 10px groove lightcyan;
+  margin: 10px;
+}
+
+#info{
+  font-family: 'Bangers', cursive;
+  color: lightsalmon;
+  font-size: 30px;
+}
+
+.detail.container{
+  
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  padding: 60px;
+  width: 1200px;
+  margin: 50px auto;
+  
   background-color: rgba(0,0,0, .9);
 }
 
@@ -112,5 +144,5 @@ li{
 #results-poster{
   height: 375px;
   width: 275px;
-  border: 10px groove white;
+  border: 10px groove lightcyan;
 }

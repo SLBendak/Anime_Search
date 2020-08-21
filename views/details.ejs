@@ -1,40 +1,41 @@
-<h2><%= shows.title %> </h2>
-<img id='result-poster' src="<%= shows.image_url %>" alt="Poster">
+<div class="detail container">
 
-<h3>Rating: <%= shows.rating %> </h3>
+    <img id='detail-poster' src="<%= shows.image_url %>" alt="Poster">
+    
+    <h1><span id="titles"><%= shows.title %></span></h1>
 
-<h3>Episodes: <%= shows.episodes %> </h3>
+    <h3><span id="info">Rating: </span><%= shows.rating %> </h3>
 
-<h3>Status: <%= shows.status %> <br> Aired: <%= shows.aired.string %> </h3>
+    <h3><span id="info">Episodes: </span><%= shows.episodes %> </h3>
 
+    <h3><span id="info">Status: </span><%= shows.status %> <br> Aired: <%= shows.aired.string %> </h3>
 
+    <p><span id="info">Synopsis: </span><%= shows.synopsis %> <span class="score"><span id="info">Score: </span><%= shows.score %></span> <br> <%= shows.background %> </p>
 
-<h3>Synopsis</h3>
-<p><%= shows.synopsis %> <br> <%= shows.background %> </p>
+    <p>
+        <span id="info">Producers: </span>
+        <% for(let i = 0; i < shows.producers.length; i++) { %>
+            <%= shows.producers[i].name + ","%>
+        <% } %> 
+    </p>
 
-<h3>Producers: </h3>
-<p>
-<% for(let i = 0; i < shows.producers.length; i++) { %>
-    <%= shows.producers[i].name + ","%>
-<% } %> 
-</p>
+    <p>
+        <span id="info">Genres: </span>
+        <% for(let i = 0; i < shows.genres.length; i++) { %>
+            <%= shows.genres[i].name + ","%>
+        <% } %> 
+    </p>
+    <div class="buttons">
+        <form method="POST" action="/favorites">
+            <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
+            <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+            <button class="btn btn-primary" type="submit">Add to Favorites</button>
+        </form>
 
-<h3>Genres: </h3>
-<p>
-<% for(let i = 0; i < shows.genres.length; i++) { %>
-    <%= shows.genres[i].name + ","%>
-<% } %> 
-
-<form method="POST" action="/favorites">
-    <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
-    <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
-    <button class="btn btn-primary" type="submit">Add to Favorites</button>
-</form>
-
-<form method="POST" action="/watch_list">
-    <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
-    <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
-    <button class="btn btn-primary" type="submit">Add to Watch List</button>
-</form>
-
-</p>
+        <form method="POST" action="/watch_list">
+            <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
+            <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+            <button class="btn btn-primary" type="submit">Add to Watch List</button>
+        </form>
+    </div>
+</div>
