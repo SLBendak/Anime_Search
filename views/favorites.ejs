@@ -1,19 +1,17 @@
 <h2>Favorites Page</h2>
+<div class="favorite-container">
+    <% for (let i=0; i < favorites.length; i++){ %>
+        <% let eachFavorite = favorites[i].get(); %>
+            <div class="favorite-items">
+                <h3><%= eachFavorite.title %> </h3>
+                <p>
+                    <img id='results-poster' name="pinned" src="<%= eachFavorite.image %>" alt="poster">
+                </p>
+                
+                <form method="POST" action="/favorites/<%= eachFavorite.id %>?_method=DELETE">
+                    <button class="btn btn-primary" type="submit">Remove from Favorites</button>
+                </form>
+            </div>
 
-<h3>Welcome to your Favorites</h3>
-
-
-<% for (let i=0; i < favorites.length; i++){ %>
-    <% let eachFavorite = favorites[i].get(); %>
-        <div class="fave">
-            <h3><%= eachFavorite.title %> </h3>
-            <p>
-                <img name="pinned" src="<%= eachFavorite.image %>" alt="poster">
-            </p>
-            
-            <form method="POST" action="/favorites/<%= eachFavorite.id %>?_method=DELETE">
-                <button class="btn btn-primary" type="submit">Remove from Favorites</button>
-            </form>
-        </div>
-<% } %>
-
+    <% } %>
+</div>

@@ -146,3 +146,22 @@ li{
   width: 275px;
   border: 10px groove lightcyan;
 }
+
+.favorite-container{
+  margin: auto;
+  width: 1200px;
+  background-color: rgba(0,0,0, .7);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+  align-items: end;
+  justify-content: space-evenly; 
+}
+
+.favorite-items{
+  text-align: center;
+  padding: 20px;
+  font-family: 'Bangers', cursive;
+  color: lightcyan;
+  
+}
