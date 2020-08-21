@@ -46,7 +46,7 @@ app.use((req, res, next) => {
   // before every route, we will attach our user to res.local
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  next();
+  next(); 
 });
 
 ///////////////////////////////////////////////////////////////////////////// userInfo

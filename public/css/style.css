@@ -1,4 +1,9 @@
 
+/* *{
+  outline: 1px dotted red;
+  font-weight:bolder;
+} */
+
 body{
   background-image: url("../assets/images/lantern-wallpaper.jpg");
   
@@ -20,7 +25,7 @@ nav ul li {
   color: white;
   
   border: 10px solid rgba(0,0,0, .7);
-  border-radius: 50px;
+  border-radius: 50px 50px 0px 50px;
   background-color: #bf3a30;
   background-image: linear-gradient(315deg, #bf3a30 0%, #864ba2 74%);
   
@@ -87,17 +92,54 @@ li{
   color: lightsalmon;
   font-size: 30px;
 }
-
+.details-box{
+  position: absolute;
+  width: 100%;
+  /* height: 100%; */
+}
 .detail.container{
   
   font-size: 20px;
   text-align: center;
   color: white;
   padding: 60px;
-  width: 1200px;
+  width: 1000px;
   margin: 0 auto;
+  margin-left: 5%;
   
   background-color: rgba(0,0,0, .9);
+}
+
+.comment-container{
+  width: 300px;
+  height: 100%;
+  background-color: #864ba2;
+  background-image: linear-gradient(45deg, #864ba2 0%, #bf3a30 74%);
+  border: 10px solid rgba(0,0,0, .7);
+  border-radius: 0px 0px 50px 50px;
+  float: right;
+  position: relative;
+  right: 0px;
+  margin: -10px auto;
+  text-align: center;
+  /* font-family: 'Bangers', cursive; */
+
+  display: grid;
+  grid-template-columns: 1fr;
+  
+  align-items: end;
+  /* justify-content: space-evenly;  */
+  
+}
+
+.comment-items{
+  margin: 5px auto;
+  background-color: lightcyan;
+  border: 10px solid rgba(0,0,0, .7);
+  border-radius: 50px;
+  width: 90%;
+  text-align: center;
+  font-size: 12px;
 }
 
 .auth-container{
