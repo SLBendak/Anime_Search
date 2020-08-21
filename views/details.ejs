@@ -26,18 +26,21 @@
                 <%= shows.genres[i].name + ","%>
             <% } %> 
         </p>
-        <div class="buttons">
-            <form method="POST" action="/favorites">
-                <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
-                <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
-                <button class="btn btn-primary" type="submit">Add to Favorites</button>
-            </form>
-
-            <form method="POST" action="/watch_list">
-                <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
-                <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
-                <button class="btn btn-primary" type="submit">Add to Watch List</button>
-            </form>
+        <div class="buttons-container">
+            <div class="fave-button">
+                <form method="POST" action="/favorites">
+                    <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
+                    <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+                    <button class="btn btn-primary" type="submit">Add to Favorites</button>
+                </form>
+            </div>
+            <div class="watch-button">
+                <form method="POST" action="/watch_list">
+                    <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
+                    <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+                    <button class="btn btn-primary" type="submit">Add to Watch List</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -45,7 +48,7 @@
 </div>
 
         <div class="comment-container">
-            
+
             <h1 id="comments-title">COMMENTS</h1>
 
             <div class="comment-items">

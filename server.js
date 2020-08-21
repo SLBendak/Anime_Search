@@ -176,7 +176,7 @@ app.get('/favorites', (req, res) => {
         })
         .then(([favorite, favoriteCreated]) => {
           console.log(favorite.get())
-          res.redirect("/favorites");
+          res.redirect("back");
         })
         .catch(error => {
           res.status(404).send("error", error)
@@ -250,7 +250,7 @@ app.post('/watch_list', (req, res) => {
       })
       .then(([pin, pinCreated]) => {
         console.log(pin.get())
-        res.redirect("/watch_list");
+        res.redirect("back");
       })
       .catch(error => {
         res.status(404).send("error", error)
