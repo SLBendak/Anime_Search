@@ -11,7 +11,7 @@
   <body>
     <%- include partials/alerts %>
     <header>
-     
+      
       <% if(!currentUser) { %>
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-light">
@@ -107,19 +107,17 @@
                 </div>
               </li>
               
-              <!-- <li class="nav-item dropdown">
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%=// req.user.dataValues.name %> 
+                  <%= currentUser.get().name %> 
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="nav-link" href="/auth/logout">Logout</a>
+                  <a class="dropdown-item" href="/auth/logout">Logout</a>
                 </div>
-              </li> -->
-
-
-              <li class="nav-item active">
-                <a class="nav-link" href="/auth/logout">Logout</a>
               </li>
+
+
+              
 
               <a class="navbar-brand" id="brand" href="#">Nani Anime</a>
 
@@ -136,7 +134,7 @@
       <% } %> 
     </header>
     <!-- <h1>Anime List</h1> -->
-    <%- userInfo %> 
+    
     <%- body %>
 
 
