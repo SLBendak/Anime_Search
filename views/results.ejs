@@ -1,12 +1,20 @@
 <div class="favorite-container">
     <% shows.forEach(s => { %>
         <div class="favorite-items">
-            <a href="/details/<%=s.mal_id%>">
-            <h2><%= s.title %> </h2>
-            <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
-            
-            <p><small>Click for show details</small></p>
-            </a>
+            <form method="POST" action="/details/<%=s.mal_id%>">
+                <input id='faveTitles' hidden type="text" name="title" value="<%= s.title %>">
+                <input id='faveTitles' hidden type="text" name="image" value="<%= s.image_url %>">
+                <input id='faveTitles' hidden type="text" name="apiId" value="<%= s.mal_id %>">
+                <button class="btn btn-link" type="submit">
+                
+                
+                <h2><%= s.title %> </h2>
+                <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
+                
+                <h4>Details</h4>
+
+                </button>
+            </form>
         </div>
     <% }) %> 
 </div>

@@ -103,17 +103,29 @@ app.post('/details/:show_id', (req, res) => {
       apiId: req.params.show_id
     },
     defaults: {
-      image: req.body.image,
-      title: req.body.title
+      title: req.body.title,
+      image: req.body.image
     }
+    
   })
-  .then(([show, showCreated]) =>{
+  .then((show) =>{
     db.comment.create({
       where: {
         userId: req.user.id,
-        showId: show.apiId,
+        showId: show.id,
         content: req.body.content
       }
+      
+    })
+    .then((response) => {
+      let results = response.data.anime;
+      console.log(response.data.anime)
+      // setting variable to our data
+      res.render('details/:show_id', {comment: results});
+      // render home with the data
+    })
+    .catch(err => {
+      console.log("you done goofed", err)
     })
     .then(([comment, favoriteCreated]) => {
       console.log(comment.get())

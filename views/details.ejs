@@ -58,17 +58,23 @@
             <div class="comment-items">
                 <h1 id="comment-content">comments</h1>
             </div>
-            <div class="comment-items">
-                <h1 id="comment-content">Work in Progress</h1>
-            </div>
 
+            <!-- <%// comment.forEach(c => { %>
+
+                <div class="comment-items">
+                    <h1 id="comment-content"><%=// c.content %> </h1>
+                </div>
+                
+            <%// }) %>  -->
             <div id="newComment">
                 
                 <form method="POST" action="/details/<%=shows.mal_id%>">
                     <!-- <input type="text" name="content" value="content"> -->
-                    <textarea name="" id="" cols="30" rows="3" placeholder="Add Comment"></textarea>
-                    <br>
-                    <input id='pinnedTitles' hidden type="text" name="showId" value="<%= shows.id %>">
+                    <textarea name="content" id="content" cols="30" rows="3" placeholder="Add Comment"></textarea>
+                    <input id='comment-info' hidden type="text" name="title" value="<%= shows.title %>">
+                    <input id='comment-info' hidden type="text" name="image" value="<%= shows.image_url %>">
+                    
+                    <input id='comment-info' hidden type="text" name="showId" value="<%= shows.id %>">
                     <button class="btn btn-primary" type="submit">Post</button>
                 </form>
             </div>
