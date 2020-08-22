@@ -31,6 +31,7 @@
                 <form method="POST" action="/favorites">
                     <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
                     <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+                    <input id='faveTitles' hidden type="text" name="apiId" value="<%= shows.mal_id %>">
                     <button class="btn btn-primary" type="submit">Add to Favorites</button>
                 </form>
             </div>

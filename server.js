@@ -72,9 +72,18 @@ app.get('/', (req, res) => {
   })
 })
 ///////////////////////////////////////////////////////////////////////////// details page 
-app.get('/details/:show_id', (req, res) => {
+app.post('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
 
+  db.show.findOrCreate({
+    where: {
+      title: req.body.title
+    },
+    defaults: {
+      image: req.body.image,
+      apiId: i
+    }
+  })
   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
   .then((response) => {
     let results = response.data;
@@ -164,7 +173,8 @@ app.get('/favorites', (req, res) => {
           title: req.body.title
         },
         defaults: {
-          image: req.body.image
+          image: req.body.image,
+          apiId: req.body.mal_id
         }
       })
       .then(([show, showCreated]) =>{
@@ -176,7 +186,7 @@ app.get('/favorites', (req, res) => {
         })
         .then(([favorite, favoriteCreated]) => {
           console.log(favorite.get())
-          res.redirect("back");
+          res.redirect("/favorites");
         })
         .catch(error => {
           res.status(404).send("error", error)
@@ -250,7 +260,7 @@ app.post('/watch_list', (req, res) => {
       })
       .then(([pin, pinCreated]) => {
         console.log(pin.get())
-        res.redirect("back");
+        res.redirect("/watch_list");
       })
       .catch(error => {
         res.status(404).send("error", error)
