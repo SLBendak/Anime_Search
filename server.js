@@ -95,6 +95,38 @@ app.post('/details/:show_id', (req, res) => {
   })
 
 })
+//////////////////////////////////////////////////////////////////////////// Comment post route
+
+app.post('/details/:show_id', (req, res) => {
+  db.show.findOne({
+    where: {
+      apiId: req.params.show_id
+    },
+    defaults: {
+      image: req.body.image,
+      title: req.body.title
+    }
+  })
+  .then(([show, showCreated]) =>{
+    db.comment.create({
+      where: {
+        userId: req.user.id,
+        showId: show.apiId,
+        content: req.body.content
+      }
+    })
+    .then(([comment, favoriteCreated]) => {
+      console.log(comment.get())
+      res.redirect("back");
+    })
+    .catch(error => {
+      res.status(404).send("error", error)
+    })
+  })
+  .catch(error => {
+    res.status(404).send("error", error)
+  })
+})  
 //////////////////////////////////////////////////////////////////////////// Title search
 app.get('/results', (req, res) => {
   let search = req.query.searchTitle;
