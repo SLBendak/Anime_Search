@@ -72,72 +72,80 @@ app.get('/', (req, res) => {
   })
 })
 ///////////////////////////////////////////////////////////////////////////// details page 
-app.post('/details/:show_id', (req, res) => {
+app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
 
-  db.show.findOrCreate({
+  db.comment.findAll({
     where: {
-      title: req.body.title
-    },
-    defaults: {
-      image: req.body.image,
-      apiId: i
+      showId: i
     }
   })
-  axios.get(`https://api.jikan.moe/v3/anime/${i}`)
-  .then((response) => {
-    let results = response.data;
-    // console.log(response.data)
-    res.render('details', {shows: results})
+  .then((comment) => {
+    db.user.findOne({
+      where: {
+        id: req.user.id
+      }
+    })
+    .then((user) => {
+
+      axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+      .then((response) => {
+        let results = response.data;
+        // console.log(response.data)
+        res.render('details', {shows: results})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
   .catch(err => {
-    console.log('err')
+    console.log(err)
   })
+
 
 })
 //////////////////////////////////////////////////////////////////////////// Comment post route
 
 app.post('/details/:show_id', (req, res) => {
-  db.show.findOne({
-    where: {
-      apiId: req.params.show_id
-    },
-    defaults: {
-      title: req.body.title,
-      image: req.body.image
-    }
-    
-  })
-  .then((show) =>{
-    db.comment.create({
+  let i = req.params.show_id;
+
+    db.show.findOrCreate({
       where: {
-        userId: req.user.id,
-        showId: show.id,
-        content: req.body.content
+        apiId: i
+      },
+      defaults: {
+        image: req.body.image,
+        title: req.body.title
       }
-      
     })
-    .then((response) => {
-      let results = response.data.anime;
-      console.log(response.data.anime)
-      // setting variable to our data
-      res.render('details/:show_id', {comment: results});
-      // render home with the data
+    .then(([show, showCreated]) => {
+      db.comment.create({
+        where: {
+          userId: req.user.id,
+          showId: show.id,
+          content: req.body.content
+        }
+      })
+      .then((comment) => {
+        res.redirect('/details/' + req.params.show_id);
+      })
+      .catch(err => {
+        console.log("you done goofed", err)
+      })
+      .then(([comment, favoriteCreated]) => {
+        console.log(comment.get())
+        res.redirect("back");
+      })
+      .catch(error => {
+        res.status(404).send(error)
+      })
+
     })
-    .catch(err => {
-      console.log("you done goofed", err)
-    })
-    .then(([comment, favoriteCreated]) => {
-      console.log(comment.get())
-      res.redirect("back");
-    })
-    .catch(error => {
-      res.status(404).send("error", error)
-    })
-  })
-  .catch(error => {
-    res.status(404).send("error", error)
-  })
+  
 })  
 //////////////////////////////////////////////////////////////////////////// Title search
 app.get('/results', (req, res) => {

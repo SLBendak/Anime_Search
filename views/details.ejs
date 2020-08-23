@@ -67,14 +67,14 @@
                 
             <%// }) %>  -->
             <div id="newComment">
-                
+                <!-- <h3><%=// user.name %></h3> -->
                 <form method="POST" action="/details/<%=shows.mal_id%>">
-                    <!-- <input type="text" name="content" value="content"> -->
+
                     <textarea name="content" id="content" cols="30" rows="3" placeholder="Add Comment"></textarea>
-                    <input id='comment-info' hidden type="text" name="title" value="<%= shows.title %>">
-                    <input id='comment-info' hidden type="text" name="image" value="<%= shows.image_url %>">
-                    
                     <input id='comment-info' hidden type="text" name="showId" value="<%= shows.id %>">
+                    
+                    
+                    
                     <button class="btn btn-primary" type="submit">Post</button>
                 </form>
             </div>
