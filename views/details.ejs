@@ -1,51 +1,49 @@
 <div class="details-box">
     <div class="detail container">
 
-        <h1><span id="titles"><%= shows.title %></span></h1>
+        <h1><span id="titles"><%= show.title %></span></h1>
         
-        <img id='detail-poster' src="<%= shows.image_url %>" alt="Poster">
+        <img id='detail-poster' src="<%= show.image_url %>" alt="Poster">
 
-        <h3><span id="info">Rating: </span><%= shows.rating %> </h3>
+        <h3><span id="info">Rating: </span><%= show.rating %> </h3>
 
-        <h3><span id="info">Episodes: </span><%= shows.episodes %> </h3>
+        <h3><span id="info">Episodes: </span><%= show.episodes %> </h3>
 
-        <h3><span id="info">Status: </span><%= shows.status %> <br> Aired: <%= shows.aired.string %> </h3>
+        <h3><span id="info">Status: </span><%= show.status %> <br> Aired: <%= show.aired.string %> </h3>
 
-        <p><span id="info">Synopsis: </span><%= shows.synopsis %> <span class="score"><span id="info">Score: </span><%= shows.score %>/10</span> <br> <%= shows.background %> </p>
+        <p><span id="info">Synopsis: </span><%= show.synopsis %> <span class="score"><span id="info">Score: </span><%= show.score %>/10</span> <br> <%= show.background %> </p>
 
         <p>
             <span id="info">Producers: </span>
-            <% for(let i = 0; i < shows.producers.length; i++) { %>
-                <%= shows.producers[i].name + ","%>
+            <% for(let i = 0; i < show.producers.length; i++) { %>
+                <%= show.producers[i].name + ","%>
             <% } %> 
         </p>
 
         <p>
             <span id="info">Genres: </span>
-            <% for(let i = 0; i < shows.genres.length; i++) { %>
-                <%= shows.genres[i].name + ","%>
+            <% for(let i = 0; i < show.genres.length; i++) { %>
+                <%= show.genres[i].name + ","%>
             <% } %> 
         </p>
         <div class="buttons-container">
             <div class="fave-button">
                 <form method="POST" action="/favorites">
-                    <input id='faveTitles' hidden type="text" name="title" value="<%= shows.title %>">
-                    <input id='faveTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
-                    <input id='faveTitles' hidden type="text" name="apiId" value="<%= shows.mal_id %>">
+                    <input id='faveTitles' hidden type="text" name="title" value="<%= show.title %>">
+                    <input id='faveTitles' hidden type="text" name="image" value="<%= show.image_url %>">
+                    <input id='faveTitles' hidden type="text" name="apiId" value="<%= show.mal_id %>">
                     <button class="btn btn-primary" type="submit">Add to Favorites</button>
                 </form>
             </div>
             <div class="watch-button">
                 <form method="POST" action="/watch_list">
-                    <input id='pinnedTitles' hidden type="text" name="title" value="<%= shows.title %>">
-                    <input id='pinnedTitles' hidden type="text" name="image" value="<%= shows.image_url %>">
+                    <input id='pinnedTitles' hidden type="text" name="title" value="<%= show.title %>">
+                    <input id='pinnedTitles' hidden type="text" name="image" value="<%= show.image_url %>">
                     <button class="btn btn-primary" type="submit">Add to Watch List</button>
                 </form>
             </div>
         </div>
     </div>
-
-    
 </div>
 
         <div class="comment-container">
@@ -59,19 +57,25 @@
                 <h1 id="comment-content">comments</h1>
             </div>
 
-            <!-- <%// comment.forEach(c => { %>
+            <%// show.comments.forEach(c => { %>
 
-                <div class="comment-items">
-                    <h1 id="comment-content"><%=// c.content %> </h1>
-                </div>
-                
-            <%// }) %>  -->
+                <% for (let i=0; i < show.comments.length; i++){ %>
+                    <% let eachComment = show.comments[i].get(); %>
+                        <div class="comment-items">
+                            <h1 id="comment-content"><%= eachComment.content %> </h1>
+                        </div>
+                <% } %> 
+
+            <%// }) %>  
             <div id="newComment">
                 <!-- <h3><%=// user.name %></h3> -->
-                <form method="POST" action="/details/<%=shows.mal_id%>">
+                <form method="POST" action="/details/<%=show.mal_id%>">
+
+                    <input id='pinnedTitles' hidden type="text" name="title" value="<%= show.title %>">
+                    <input id='pinnedTitles' hidden type="text" name="image" value="<%= show.image_url %>">
 
                     <textarea name="content" id="content" cols="30" rows="3" placeholder="Add Comment"></textarea>
-                    <input id='comment-info' hidden type="text" name="showId" value="<%= shows.id %>">
+                    <input id='comment-info' hidden type="text" name="showId" value="<%= show.id %>">
                     
                     
                     

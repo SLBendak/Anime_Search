@@ -74,13 +74,7 @@ app.get('/', (req, res) => {
 ///////////////////////////////////////////////////////////////////////////// details page 
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
-
-  db.comment.findAll({
-    where: {
-      showId: i
-    }
-  })
-  .then((comment) => {
+  
     db.user.findOne({
       where: {
         id: req.user.id
@@ -92,7 +86,18 @@ app.get('/details/:show_id', (req, res) => {
       .then((response) => {
         let results = response.data;
         // console.log(response.data)
-        res.render('details', {shows: results})
+        db.show.findOne({
+          where: {
+            apiId: i
+          },
+          include: [db.comment]
+        })
+        .then((show) => {
+          // res.render('details', {show: results, user: user})
+          res.render('details', {show: results, user: user.comments})
+
+
+        })
       })
       .catch(err => {
         console.log(err)
@@ -102,12 +107,10 @@ app.get('/details/:show_id', (req, res) => {
       console.log(err)
     })
   })
-  .catch(err => {
-    console.log(err)
-  })
+  
+  
 
 
-})
 //////////////////////////////////////////////////////////////////////////// Comment post route
 
 app.post('/details/:show_id', (req, res) => {
@@ -124,24 +127,25 @@ app.post('/details/:show_id', (req, res) => {
     })
     .then(([show, showCreated]) => {
       db.comment.create({
-        where: {
+        
           userId: req.user.id,
           showId: show.id,
           content: req.body.content
-        }
+        
       })
       .then((comment) => {
         res.redirect('/details/' + req.params.show_id);
       })
+      
+        .then(([comment, favoriteCreated]) => {
+          console.log(comment.get())
+          res.redirect("back");
+        })
+        .catch(err => {
+          console.log("you done goofed", err)
+        })
       .catch(err => {
         console.log("you done goofed", err)
-      })
-      .then(([comment, favoriteCreated]) => {
-        console.log(comment.get())
-        res.redirect("back");
-      })
-      .catch(error => {
-        res.status(404).send(error)
       })
 
     })
