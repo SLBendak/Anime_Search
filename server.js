@@ -115,8 +115,6 @@ app.get('/details/:show_id', (req, res) => {
             res.render('details', {show: results, sComments: show, user: user})
             return
           }
-          res.redirect('details')
-          res.render('details', {show: results, sComments: show, user: user})
           db.show.create({
             apiId: i,
             image: results.image_url,
@@ -125,6 +123,8 @@ app.get('/details/:show_id', (req, res) => {
           })
           .then((newShow) => {
             console.log("NO show found!!!")
+            res.redirect('details')
+            res.render('details', {show: results, sComments: show, user: user})
 
             return
           })
