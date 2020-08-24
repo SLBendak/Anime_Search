@@ -105,7 +105,7 @@ li{
   padding: 60px;
   width: 1000px;
   margin: 0 auto;
-  /* margin-left: 5%; */
+  margin-left: 5%;
   
   background-color: rgba(0,0,0, .9);
 }
@@ -149,7 +149,7 @@ li{
   margin: 5px auto;
   background-color: lightcyan;
   border: 10px solid rgba(0,0,0, .7);
-  border-radius: 50px;
+  border-radius: 20px;
   width: 90%;
   text-align: center;
   font-size: small;

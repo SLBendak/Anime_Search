@@ -46,9 +46,9 @@
     </div>
 </div>
 
-        <!-- <div class="comment-container">
+        <div class="comment-container">
 
-            <h1 id="comments-title">COMMENTS</h1> -->
+            <h1 id="comments-title">COMMENTS</h1>
 
             <!-- <div class="comment-items">
                 <h1 id="comment-content">comments go here</h1>
@@ -60,31 +60,31 @@
             
 
                
-                        <%// sComments.forEach(eachComment => { %>
+                        <% sComments.comments.forEach(eachComment => { %>
                          
                             
-                            <!-- <div class="comment-items">
-                                <h1 id="comment-content"><%=// req.user.name  %><hr><%=// eachComment.content %> </h1>
-                            </div> -->
-                        <%// }) %>
+                            <div class="comment-items">
+                                <h1 id="comment-content"><%= user.name  %><hr><%= eachComment.content %> </h1>
+                            </div>
+                        <% }) %>
                
 
             
 
 
-            <!-- <div id="newComment">
+            <div id="newComment">
                 
-                <form method="POST" action="/details/<%=//show.mal_id%>">
+                <form method="POST" action="/details/<%=show.mal_id%>">
 
-                    <input id='pinnedTitles' hidden type="text" name="title" value="<%=// show.title %>">
-                    <input id='pinnedTitles' hidden type="text" name="image" value="<%=// show.image_url %>">
+                    <input id='pinnedTitles' hidden type="text" name="title" value="<%= show.title %>">
+                    <input id='pinnedTitles' hidden type="text" name="image" value="<%= show.image_url %>">
 
                     <textarea name="content" id="content" cols="30" rows="3" placeholder="Add Comment"></textarea>
-                    <input id='comment-info' hidden type="text" name="showId" value="<%=// show.id %>">
+                    <input id='comment-info' hidden type="text" name="showId" value="<%= show.id %>">
                     
                     
                     
                     <button class="btn btn-primary" type="submit">Post</button>
                 </form>
             </div>
-        </div> -->
+        </div>

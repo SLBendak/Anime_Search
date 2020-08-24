@@ -68,124 +68,132 @@ app.get('/', (req, res) => {
 ///////////////////////////////////////////////////////////////////////////// details page 
 
 
-app.get('/details/:show_id', (req, res) => {
-  let i = req.params.show_id;
-
-  axios.get(`https://api.jikan.moe/v3/anime/${i}`)
-  .then((response) => {
-    let results = response.data;
-    // console.log(response.data)
-    res.render('details', {show: results})
-  })
-  .catch(err => {
-    console.log('err')
-  })
-})
-
-
 // app.get('/details/:show_id', (req, res) => {
 //   let i = req.params.show_id;
-  
-//     db.user.findOne({
-//       where: {
-//         id: req.user.id
-//       }
-//     })
-//     .then((user) => {
-
-//       axios.get(`https://api.jikan.moe/v3/anime/${i}`)
-//       .then((response) => {
-//         let results = response.data;
-        
-//         db.show.findOne({
-//           where: {
-//             apiId: i
-//           },
-//           include: [db.comment]
-//         })
-//         .then((show) => {
-//           if(show){
-//             console.log("show found!!!")
-//             res.render('details', {show: results, sComments: show, user: user})
-//             return
-//           }
-//           db.show.create({
-//             apiId: i,
-//             image: req.body.image,
-//             title: req.body.title
-            
-//           })
-//           .then((newShow) => {
-//             console.log("NO show found!!!")
-
-//             res.render('details', {show: results, user: user})
-//             return
-//           })
-//           .catch(err => {
-//             console.log(err)
-//           })
-
-//           // res.render('details', {show: show, user: user})
-
-//         })
-//         .catch(err => {
-//           console.log(err)
-//         })
-//       })
-//       .catch(err => {
-//         console.log(err)
-//       })
-//     })
-//     .catch(err => {
-//       console.log(err)
-//     })
+//   ///////
+//   db.user.findOne({
+//     where: {
+//       id: req.user.id
+//     }
 //   })
+//   ////////
+//   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+//   .then((response) => {
+//     let results = response.data;
+//     // console.log(response.data)
+//     res.render('details', {show: results})
+//   })
+//   .catch(err => {
+//     console.log('err')
+//   })
+// })
+/////////////////////////////////////
+
+app.get('/details/:show_id', (req, res) => {
+  let i = req.params.show_id;
+  
+    db.user.findOne({
+      where: {
+        id: req.user.id
+      }
+    })
+    .then((user) => {
+
+      axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+      .then((response) => {
+        let results = response.data;
+        
+        db.show.findOne({
+          where: {
+            apiId: i
+          },
+          include: [db.comment]
+        })
+        .then((show) => {
+          if(show){
+            console.log("show found!!!")
+            res.render('details', {show: results, sComments: show, user: user})
+            return
+          }
+          res.redirect('details')
+          res.render('details', {show: results, sComments: show, user: user})
+          db.show.create({
+            apiId: i,
+            image: results.image_url,
+            title: results.title
+            
+          })
+          .then((newShow) => {
+            console.log("NO show found!!!")
+
+            return
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
+          // res.render('details', {show: show, user: user})
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
 
 
   
   
 
 
-//////////////////////////////////////////////////////////////////////////// Comment post route
+//////////////////////////////////////////////////////////////////////////// Comment post route 
+///////////////////
 
-// app.post('/details/:show_id', (req, res) => {
-//   let i = req.params.show_id;
+app.post('/details/:show_id', (req, res) => {
+  let i = req.params.show_id;
 
-//     db.show.findOrCreate({
-//       where: {
-//         apiId: i
-//       },
-//       defaults: {
-//         image: req.body.image,
-//         title: req.body.title
-//       }
-//     })
-//     .then(([show, showCreated]) => {
-//       db.comment.create({
+    db.show.findOrCreate({
+      where: {
+        apiId: i
+      },
+      defaults: {
+        image: req.body.image,
+        title: req.body.title
+      }
+    })
+    .then(([show, showCreated]) => {
+      db.comment.create({
         
-//           userId: req.user.id,
-//           showId: show.id,
-//           content: req.body.content
+          userId: req.user.id,
+          showId: show.id,
+          content: req.body.content
         
-//       })
-//       .then((comment) => {
-//         res.redirect('/details/' + req.params.show_id);
-//       })
+      })
+      .then((comment) => {
+        res.redirect('/details/' + req.params.show_id);
+      })
       
-        // .then(([comment, favoriteCreated]) => {
-        //   console.log(comment.get())
-        //   res.redirect("back");
-        // })
-        // .catch(err => {
-        //   console.log("you done goofed", err)
-        // })
-//       .catch(err => {
-//         console.log("you done goofed", err)
-//       })
+        .then(([comment, favoriteCreated]) => {
+          console.log(comment.get())
+          res.redirect("back");
+        })
+        .catch(err => {
+          console.log("you done goofed", err)
+        })
+      .catch(err => {
+        console.log("you done goofed", err)
+      })
 
-//     })
+    })
   
-// })  
+})  
 //////////////////////////////////////////////////////////////////////////// Title search
 app.get('/results', (req, res) => {
   let search = req.query.searchTitle;
@@ -234,8 +242,6 @@ app.get('/genreResults', (req, res) => {
 
 //////////////////////////////////////////////////////////// Favorite Get Route
 app.get('/favorites', (req, res) => {
-  // TODO: Get all records from the DB and render to view
-  // If there is no user redirect to index
   if(!req.user) {
     res.redirect('/')
     return
@@ -258,7 +264,6 @@ app.get('/favorites', (req, res) => {
 });
 //////////////////////////////////////////////////////////// Favorite Post Route
   app.post('/favorites', (req, res) => {
-    // TODO: Get form data and add a new record to DB
       db.show.findOrCreate({
         where: {
           title: req.body.title
