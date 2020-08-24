@@ -122,15 +122,17 @@ app.get('/details/:show_id', (req, res) => {
             
           })
           .then((newShow) => {
+            
             console.log("NO show found!!!")
-            res.redirect('details')
-            res.render('details', {show: results,sComments: show, user: user})
-
+            res.redirect(`/details/${i}`)
+            // res.render('details', {show: results, newShow: newShow, user: user})
+            
             return
           })
           .catch(err => {
             console.log(err)
           })
+          
 
           // res.render('details', {show: show, user: user})
 
