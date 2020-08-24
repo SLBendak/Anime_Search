@@ -70,6 +70,7 @@ app.get('/', (req, res) => {
 
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
+  
   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
   .then((response) => {
     let results = response.data;
