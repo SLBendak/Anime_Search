@@ -122,11 +122,6 @@ app.get('/details/:show_id', (req, res) => {
     })
   })
 
-
-  
-  
-
-
 //////////////////////////////////////////////////////////////////////////// Comment post route 
 ///////////////////
 
@@ -154,14 +149,13 @@ app.post('/details/:show_id', (req, res) => {
       .then((comment) => {
         res.redirect('/details/' + req.params.show_id);
       })
-      
-        .then(([comment, favoriteCreated]) => {
-          console.log(comment.get())
-          res.redirect("back");
-        })
-        .catch(err => {
-          console.log("you done goofed", err)
-        })
+      .then(([comment, favoriteCreated]) => {
+        console.log(comment.get())
+        res.redirect("back");
+      })
+      .catch(err => {
+        console.log("you done goofed", err)
+      })
       .catch(err => {
         console.log("you done goofed", err)
       })
@@ -221,7 +215,7 @@ app.get('/genreResults', (req, res) => {
 app.use('/auth', require('./routes/auth'));
 app.use('/watch_list', require('./routes/watch_list.js'));
 app.use('/favorites', require('./routes/favorites'));
-///////////////////////////////////////// failed url
+///////////////////////////////////////// failed route
 
 app.get('*', function(req, res){
   res.render('fail');

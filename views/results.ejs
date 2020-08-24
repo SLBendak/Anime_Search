@@ -2,10 +2,10 @@
     <% shows.forEach(s => { %>
         <div class="favorite-items">
             <a href="/details/<%=s.mal_id%>">
-                <h2><%= s.title %> </h2>
+                <h2 id="blue-title"><%= s.title %> </h2>
                 <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
                 
-                <p><small>Click for show details</small></p>
+                <p><small id="blue-title">Click for show details</small></p>
                 </a>
         </div>
     <% }) %> 
