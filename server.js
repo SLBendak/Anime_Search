@@ -124,7 +124,7 @@ app.get('/details/:show_id', (req, res) => {
           .then((newShow) => {
             console.log("NO show found!!!")
             res.redirect('details')
-            res.render('details', {show: results, sComments: show, user: user})
+            res.render('details', {show: results,sComments: show, user: user})
 
             return
           })
