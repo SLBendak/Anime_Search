@@ -49,7 +49,6 @@ app.use((req, res, next) => {
   next(); 
 });
 
-
 ///////////////////////////////////////////////////////////////////////////// home page shows
 app.get('/', (req, res) => {
   
@@ -65,6 +64,9 @@ app.get('/', (req, res) => {
     console.log("you done goofed", err)
   })
 })
+
+
+
 ///////////////////////////////////////////////////////////////////////////// details page 
 
 app.get('/details/:show_id', (req, res) => {
@@ -142,8 +144,9 @@ app.post('/details/:show_id', (req, res) => {
     })
     .then(([show, showCreated]) => {
       db.comment.create({
-        
+
           userId: req.user.id,
+          name: req.user.name,
           showId: show.id,
           content: req.body.content
         
@@ -183,6 +186,10 @@ app.get('/results', (req, res) => {
       // setting variable to our data
       res.render('results', {shows: result});
       // render home with the data
+      if(!response){
+        req.flash('failure', 'Sorry not found.');
+        res.redirect('/');
+      }
   })
   .catch(err => {
       console.log("you done goofed", err)
@@ -375,13 +382,20 @@ app.put('/watch_list/:id', (req,res) => {
     console.log("error: ", error)
   })
 })
+
+
 ////////////////////////////////////////
 app.get('/favorites', IsLoggedIn, (req, res) => {
   res.render('favorites');
 });
 
 app.use('/auth', require('./routes/auth'));
+///////////////////////////////////////// failed url
 
+app.get('*', function(req, res){
+  res.render('fail');
+});
+//////////////////////////////////////////
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);

@@ -1,4 +1,4 @@
-# Nani Anime
+# Anime Plug
 
 ## Technologies used
 
@@ -30,7 +30,7 @@ Nani Anime is a app developed to keep track of the the shows you love and the on
 
 ## Heroku Url
 
-Start keeping track here: [Nani Anime](https://shanes-anime-search.herokuapp.com/)
+Start keeping track here: [Anime Plug](https://shanes-anime-search.herokuapp.com/)
 
 
 ## Installation Instructions
