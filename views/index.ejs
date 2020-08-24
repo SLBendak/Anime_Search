@@ -20,14 +20,16 @@
     <% shows.forEach(s => { %>
         <div class="results-items">
             <!-- <a id="result-text" href="/details/<%=//s.mal_id%>"> -->
-                
-                <a href="/details/<%=s.mal_id%>">
-                    <h2><%= s.title %> </h2>
-                    <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
                     
-                    <p><small>Click for show details</small></p>
-                    </a>
+                    <a href="/details/<%=s.mal_id%>">
+                        <h2><%= s.title %> </h2>
+                        <img id='results-poster' src="<%= s.image_url %>" alt="Poster">
+                        
+                        
 
+                        <p><small>Click for show details</small></p>
+                    </a>
+                    
             <!-- </a> -->
         </div>
     <% }) %> 

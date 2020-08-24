@@ -50,25 +50,30 @@
 
             <h1 id="comments-title">COMMENTS</h1>
 
-            <div class="comment-items">
+            <!-- <div class="comment-items">
                 <h1 id="comment-content">comments go here</h1>
             </div>
             <div class="comment-items">
                 <h1 id="comment-content">comments</h1>
-            </div>
+            </div> -->
 
-            <%// show.comments.forEach(c => { %>
+            
 
-                <% for (let i=0; i < sComments.length; i++){ %>
-                    <% let eachComment = sComments[i].get(); %>
-                        <div class="comment-items">
-                            <h1 id="comment-content"><%= eachComment.content %> </h1>
-                        </div>
-                <% } %> 
+               
+                        <%// sComments.forEach(eachComment => { %>
+                         
+                            
+                            <div class="comment-items">
+                                <h1 id="comment-content"><%=// req.user.name  %><hr><%=// eachComment.content %> </h1>
+                            </div>
+                        <%// }) %>
+               
 
-            <%// }) %>  
+            
+
+
             <div id="newComment">
-                <!-- <h3><%=// user.name %></h3> -->
+                
                 <form method="POST" action="/details/<%=show.mal_id%>">
 
                     <input id='pinnedTitles' hidden type="text" name="title" value="<%= show.title %>">

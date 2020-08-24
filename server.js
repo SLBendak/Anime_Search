@@ -49,12 +49,6 @@ app.use((req, res, next) => {
   next(); 
 });
 
-///////////////////////////////////////////////////////////////////////////// userInfo
-
-
-app.get("/userInfo")
-
-
 
 ///////////////////////////////////////////////////////////////////////////// home page shows
 app.get('/', (req, res) => {
@@ -72,41 +66,81 @@ app.get('/', (req, res) => {
   })
 })
 ///////////////////////////////////////////////////////////////////////////// details page 
+
+
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
-  
-    db.user.findOne({
-      where: {
-        id: req.user.id
-      }
-    })
-    .then((user) => {
-
-      axios.get(`https://api.jikan.moe/v3/anime/${i}`)
-      .then((response) => {
-        let results = response.data;
-        // console.log(response.data)
-        db.show.findOne({
-          where: {
-            apiId: i
-          },
-          include: [db.comment]
-        })
-        .then((show) => {
-          // res.render('details', {show: results, user: user})
-          res.render('details', {show: results, sComments: show.comments, user: user.name})
-
-
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+  .then((response) => {
+    let results = response.data;
+    // console.log(response.data)
+    res.render('details', {show: results})
   })
+  .catch(err => {
+    console.log('err')
+  })
+})
+
+
+// app.get('/details/:show_id', (req, res) => {
+//   let i = req.params.show_id;
+  
+//     db.user.findOne({
+//       where: {
+//         id: req.user.id
+//       }
+//     })
+//     .then((user) => {
+
+//       axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+//       .then((response) => {
+//         let results = response.data;
+        
+//         db.show.findOne({
+//           where: {
+//             apiId: i
+//           },
+//           include: [db.comment]
+//         })
+//         .then((show) => {
+//           if(show){
+//             console.log("show found!!!")
+//             res.render('details', {show: results, sComments: show, user: user})
+//             return
+//           }
+//           db.show.create({
+//             apiId: i,
+//             image: req.body.image,
+//             title: req.body.title
+            
+//           })
+//           .then((newShow) => {
+//             console.log("NO show found!!!")
+
+//             res.render('details', {show: results, user: user})
+//             return
+//           })
+//           .catch(err => {
+//             console.log(err)
+//           })
+
+//           // res.render('details', {show: show, user: user})
+
+//         })
+//         .catch(err => {
+//           console.log(err)
+//         })
+//       })
+//       .catch(err => {
+//         console.log(err)
+//       })
+//     })
+//     .catch(err => {
+//       console.log(err)
+//     })
+//   })
+
+
   
   
 
@@ -137,13 +171,13 @@ app.post('/details/:show_id', (req, res) => {
         res.redirect('/details/' + req.params.show_id);
       })
       
-        .then(([comment, favoriteCreated]) => {
-          console.log(comment.get())
-          res.redirect("back");
-        })
-        .catch(err => {
-          console.log("you done goofed", err)
-        })
+        // .then(([comment, favoriteCreated]) => {
+        //   console.log(comment.get())
+        //   res.redirect("back");
+        // })
+        // .catch(err => {
+        //   console.log("you done goofed", err)
+        // })
       .catch(err => {
         console.log("you done goofed", err)
       })
@@ -183,7 +217,7 @@ app.get('/genreResults', (req, res) => {
     }
   }
   console.log("test", search)
-  axios.get(`https://api.jikan.moe/v3/genre/anime/${search}`, qs)
+  axios.get(`https://api.jikan.moe/v3/genre/anime/${search}`)
   .then((response) => {
       console.log("correct route")
       let result = response.data.anime;
