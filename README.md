@@ -1,107 +1,141 @@
-# Express Authentication
+# Nani Anime
 
-Express authentication template using Passport + flash messages + custom middleware
+## Technologies used
 
-## What it includes
+- HTML5
+- CSS
+- Javascript
+- Node.js
+- Express.js
+- EJS
+- Materialize
+- PostgreSQL
+- Passport
+- Store Session
 
-* Sequelize user model / migration
-* Settings for PostgreSQL
-* Passport and passport-local for authentication
-* Sessions to keep user logged in between pages
-* Flash messages for errors and successes
-* Passwords that are hashed with BCrypt
-* EJS Templating and EJS Layouts
+## Use & User Stories
 
-### User Model
+Nani Anime is a app developed to keep track of the the shows you love and the ones you want to see. 
 
-| Column Name | Data Type | Notes |
-| --------------- | ------------- | ------------------------------ |
-| id | Integer | Serial Primary Key, Auto-generated |
-| name | String | Must be provided |
-| email | String | Must be unique / used for login |
-| password | String | Stored as a hash |
-| createdAt | Date | Auto-generated |
-| updatedAt | Date | Auto-generated |
+> Users sign up to keep track of their shows.
 
-### Default Routes
+> Users can search by genre or title to find shows of interest.
 
-| Method | Path | Location | Purpose |
-| ------ | ---------------- | -------------- | ------------------- |
-| GET | / | server.js | Home page |
-| GET | /auth/login | auth.js | Login form |
-| GET | /auth/signup | auth.js | Signup form |
-| POST | /auth/login | auth.js | Login user |
-| POST | /auth/signup | auth.js | Creates User |
-| GET | /auth/logout | auth.js | Removes session info |
-| GET | /favorites | server.js | Regular User favorites |
+> Users can then save those shows to favorites or put them on a watch list which keeps track of if they watched or havent gotten around to it.
 
-## Steps To Use
+> Users can remove shows from either list if they want to free up space or change their mind about a show.
 
-#### 1. Create a new repo on Github and use your 'express-authentication' as the template
+> Users can leave comments about a show if they want to recommend or leave an opinion about the show for other users to see.
 
-When we are finished with this boilerplate, we are going to make it a template on Github that will allow us to create a new repo on Github with all this code already loaded in.
-* Go to `github.com` and create a new repository. In the template dropdown, choose this template.
-* Clone your new repo to your local machine
-* Get Codin'!
 
-#### 2. Delete any .keep files
+## Heroku Url
 
-The `.keep` files are there to maintain the file structure of the auth. If there is a folder that has nothing in it, git won't add it. The dev work around is to add a file to it that has nothing in it, just forces git to keep the folder so we can use it later.
+Start keeping track here: [Nani Anime](https://shanes-anime-search.herokuapp.com/)
 
-#### 3. Install node modules from the package.json
 
-```
-npm install
-```
+### Installation Instructions
 
-(Or just `npm i` for short)
+1. Fork and clone [Anime_Search](https://github.com/SLBendak/Anime_Search) repo
 
-#### 4. Customize with new project name
+2. Run `npm install`
 
-Remove defaulty type stuff. Some areas to consider are:
+3. Update the config.json file dialect to `postgres`
 
-* Title in `layout.ejs`
-* Description/Repo Link in `package.json`
-* Remove boilerplate's README content and replace with new project's readme
+4. Run `sequelize db:create`
 
-#### 5. Create a new database for the new project
+5. Run `sequelize db:migrate`
 
-Using the sequelize command line interface, you can create a new database from the terminal.
+6. Create your .env file and fill in: 
 
-```
-createdb <new_db_name>
-```
+    SECRET_SESSION = 'RANDOMstringHERE'
 
-#### 6. Update `config.json`
+7. Run `nodemon` and open your browser to localhost:3000
 
-* Change the database name
-* Other settings are likely okay, but check username, password, and dialect
+### ERD
 
-#### 7. Check the models and migrations for relevance to your project's needs
+![ERD](https://i.imgur.com/gzZKM1O.png)
 
-For example, if your project requires a birthdate field, then don't add that in there. 
+### Wireframe
 
-> When changing your models, update both the model and the migration.
+#### LOGIN PAGE
+![LOGIN Page](https://i.imgur.com/YqcsCBls.png)
+#### SIGNUP PAGE
+![SIGNUP Page](https://i.imgur.com/i0bnbwps.png)
+#### INDEX PAGE
+![INDEX Page](https://i.imgur.com/op289Lqs.png)
+#### RESULT PAGE
+![RESULT Page](https://i.imgur.com/t6arm8Ts.png)
+#### DETAILS PAGE
+![DETAILS Page](https://i.imgur.com/ot7aIPgs.png)
 
-#### 8. Run the migrations
+
+---
+
+## Code Snippets
+
+One of the things i was most proud of was my details route. 
+which required: 
+- finding the current user
+- making the api call
+- using an if statement to find the show to display its details
+    - if the did not exist in the table creating that instance
+        - then starting the get route over so its details could be found and displayed
 
 ```
-sequelize db:migrate
+app.get('/details/:show_id', (req, res) => {
+  let i = req.params.show_id;
+  
+    db.user.findOne({
+      where: {
+        id: req.user.id
+      }
+    })
+    .then((user) => {
+
+      axios.get(`https://api.jikan.moe/v3/anime/${i}`)
+      .then((response) => {
+        let results = response.data;
+        
+        db.show.findOne({
+          where: {
+            apiId: i
+          },
+          include: [db.comment]
+        })
+        .then((show) => {
+          if(show){
+            console.log("show found!!!")
+            res.render('details', {show: results, sComments: show, user: user})
+            return
+          }
+          db.show.create({
+            apiId: i,
+            image: results.image_url,
+            title: results.title
+          })
+          .then((newShow) => {
+            console.log("NO show found!!!")
+            res.redirect(`/details/${i}`)
+            return
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
+
 ```
 
-#### 9. Add a `.env` file with the following fields:
-
-* SESSION_SECRET: Can be any random string; usually a hash in production
-* PORT: Usually 3000 or 8000
-
-#### 10. Run server; make sure it works
-
-```
-nodemon
-```
-
-or
-
-```
-node index.js
-```
+### Unsolved problems
+No problems were left unsolved, however i can say this last route was an exciting challenge to overcome.

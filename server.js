@@ -67,28 +67,6 @@ app.get('/', (req, res) => {
 })
 ///////////////////////////////////////////////////////////////////////////// details page 
 
-
-// app.get('/details/:show_id', (req, res) => {
-//   let i = req.params.show_id;
-//   ///////
-//   db.user.findOne({
-//     where: {
-//       id: req.user.id
-//     }
-//   })
-//   ////////
-//   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
-//   .then((response) => {
-//     let results = response.data;
-//     // console.log(response.data)
-//     res.render('details', {show: results})
-//   })
-//   .catch(err => {
-//     console.log('err')
-//   })
-// })
-/////////////////////////////////////
-
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
   
@@ -119,23 +97,15 @@ app.get('/details/:show_id', (req, res) => {
             apiId: i,
             image: results.image_url,
             title: results.title
-            
           })
           .then((newShow) => {
-            
             console.log("NO show found!!!")
             res.redirect(`/details/${i}`)
-            // res.render('details', {show: results, newShow: newShow, user: user})
-            
             return
           })
           .catch(err => {
             console.log(err)
           })
-          
-
-          // res.render('details', {show: show, user: user})
-
         })
         .catch(err => {
           console.log(err)
