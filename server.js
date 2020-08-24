@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 
 app.get('/details/:show_id', (req, res) => {
   let i = req.params.show_id;
-  
+
   axios.get(`https://api.jikan.moe/v3/anime/${i}`)
   .then((response) => {
     let results = response.data;
@@ -148,29 +148,29 @@ app.get('/details/:show_id', (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////// Comment post route
 
-app.post('/details/:show_id', (req, res) => {
-  let i = req.params.show_id;
+// app.post('/details/:show_id', (req, res) => {
+//   let i = req.params.show_id;
 
-    db.show.findOrCreate({
-      where: {
-        apiId: i
-      },
-      defaults: {
-        image: req.body.image,
-        title: req.body.title
-      }
-    })
-    .then(([show, showCreated]) => {
-      db.comment.create({
+//     db.show.findOrCreate({
+//       where: {
+//         apiId: i
+//       },
+//       defaults: {
+//         image: req.body.image,
+//         title: req.body.title
+//       }
+//     })
+//     .then(([show, showCreated]) => {
+//       db.comment.create({
         
-          userId: req.user.id,
-          showId: show.id,
-          content: req.body.content
+//           userId: req.user.id,
+//           showId: show.id,
+//           content: req.body.content
         
-      })
-      .then((comment) => {
-        res.redirect('/details/' + req.params.show_id);
-      })
+//       })
+//       .then((comment) => {
+//         res.redirect('/details/' + req.params.show_id);
+//       })
       
         // .then(([comment, favoriteCreated]) => {
         //   console.log(comment.get())
@@ -179,13 +179,13 @@ app.post('/details/:show_id', (req, res) => {
         // .catch(err => {
         //   console.log("you done goofed", err)
         // })
-      .catch(err => {
-        console.log("you done goofed", err)
-      })
+//       .catch(err => {
+//         console.log("you done goofed", err)
+//       })
 
-    })
+//     })
   
-})  
+// })  
 //////////////////////////////////////////////////////////////////////////// Title search
 app.get('/results', (req, res) => {
   let search = req.query.searchTitle;
