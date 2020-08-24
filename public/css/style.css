@@ -34,6 +34,8 @@ nav ul li {
 
 
 
+
+
 #brand{
   padding-left: 5%;
   margin: 0 auto;
@@ -112,11 +114,35 @@ li{
   background-color: rgba(0,0,0, .9);
 }
 
-.fave-button{
-  background-image: url("../assets/images/favorite-icon.png");
+.buttons-container{
+
+  margin: 10px;
+  /* width: 500px; */
+  float: right;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; */
+  
+  /* align-items: end; */
+  /* justify-content: space-evenly;  */
+}
+
+.buttons{
+  text-align: center;
+}
+
+
+.fave-watch-button{
+  background-color: transparent;
   /* height:50px;
   width: 50px; */
 }
+#fave-watch{
+  height: 40px;
+  width: 40px;
+  
+  
+}
+
 
 .comment-container{
   width: 300px;

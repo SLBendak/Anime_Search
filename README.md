@@ -33,7 +33,7 @@ Nani Anime is a app developed to keep track of the the shows you love and the on
 Start keeping track here: [Nani Anime](https://shanes-anime-search.herokuapp.com/)
 
 
-### Installation Instructions
+## Installation Instructions
 
 1. Fork and clone [Anime_Search](https://github.com/SLBendak/Anime_Search) repo
 
@@ -51,11 +51,11 @@ Start keeping track here: [Nani Anime](https://shanes-anime-search.herokuapp.com
 
 7. Run `nodemon` and open your browser to localhost:3000
 
-### ERD
+## ERD
 
 ![ERD](https://i.imgur.com/gzZKM1O.png)
 
-### Wireframe
+## Wireframe
 
 #### LOGIN PAGE
 ![LOGIN Page](https://i.imgur.com/YqcsCBls.png)

@@ -8,7 +8,9 @@
                     <h3><%= eachPin.title %> </h3>
                         <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
                             <input type="text" hidden name="showSeen" value="yes">
-                            <button class="btn btn-primary" type="submit">notSeen</button>
+                            <!-- <button class="btn btn-primary" type="submit">notSeen</button> -->
+                            <button class="fave-watch-button" type="submit"><img id="fave-watch" src="../assets/images/closed-eye.png" alt="fave button"></button>
+
                         </form>
                         <p>
                             <img id='results-poster' name="pinned" src="<%= eachPin.image %>" alt="poster">
@@ -22,7 +24,7 @@
                     <h3><%= eachPin.title %> </h3> 
                         <form method="POST" action="/watch_list/<%= eachPin.id %>?_method=PUT">
                             <input type="text" hidden name="showSeen" value="no">
-                            <button class="btn btn-primary" type="submit">Seen</button>
+                            <button class="fave-watch-button" type="submit"><img id="fave-watch" src="../assets/images/open-eye.png" alt="fave button"></button>
                         </form>
                         <p>
                             <img id='results-poster' name="pinned" src="<%= eachPin.image %>" alt="poster">
