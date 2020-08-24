@@ -203,7 +203,7 @@ app.get('/genreResults', (req, res) => {
       console.log("correct route")
       let result = response.data.anime;
       // setting variable to our data
-      res.render('/genreResults', {shows: result});
+      res.render('genreResults', {shows: result});
       // render home with the data
   })
   .catch(err => {
