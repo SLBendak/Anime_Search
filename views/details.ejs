@@ -59,8 +59,8 @@
 
             <%// show.comments.forEach(c => { %>
 
-                <% for (let i=0; i < show.comments.length; i++){ %>
-                    <% let eachComment = show.comments[i].get(); %>
+                <% for (let i=0; i < sComments.length; i++){ %>
+                    <% let eachComment = sComments[i].get(); %>
                         <div class="comment-items">
                             <h1 id="comment-content"><%= eachComment.content %> </h1>
                         </div>

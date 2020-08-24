@@ -94,7 +94,7 @@ app.get('/details/:show_id', (req, res) => {
         })
         .then((show) => {
           // res.render('details', {show: results, user: user})
-          res.render('details', {show: results, user: user.comments})
+          res.render('details', {show: results, sComments: show.comments, user: user.name})
 
 
         })
